@@ -70,15 +70,15 @@
         <div class="grid grid-cols-2 gap-3">
           <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3 text-center">
             <p class="text-[10px] text-slate-400 uppercase font-semibold">Total</p>
-            <p class="text-2xl font-bold text-amber-400">9</p>
+            <p id="stat-total" class="text-2xl font-bold text-amber-400">0</p>
           </div>
           <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3 text-center">
             <p class="text-[10px] text-slate-400 uppercase font-semibold">Selesai</p>
-            <p class="text-2xl font-bold text-emerald-400">2</p>
+            <p id="stat-selesai" class="text-2xl font-bold text-emerald-400">0</p>
           </div>
           <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3 text-center">
             <p class="text-[10px] text-slate-400 uppercase font-semibold">Proses</p>
-            <p class="text-2xl font-bold text-cyan-400">7</p>
+            <p id="stat-proses" class="text-2xl font-bold text-cyan-400">0</p>
           </div>
           <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3 text-center">
             <p class="text-[10px] text-slate-400 uppercase font-semibold">Rata-Rata Hari</p>
@@ -94,23 +94,23 @@
           <div class="text-xs space-y-2">
             <div class="flex justify-between items-center text-slate-300">
               <span class="flex items-center gap-2"><i class="fa-solid fa-box text-emerald-400 w-4"></i> Barang</span>
-              <span class="font-mono text-slate-400">3 (S:1 / P:2)</span>
+              <span id="rekap-barang" class="font-mono text-slate-400">0</span>
             </div>
             <div class="flex justify-between items-center text-slate-300">
               <span class="flex items-center gap-2"><i class="fa-solid fa-helmet-safety text-emerald-400 w-4"></i> Konstruksi</span>
-              <span class="font-mono text-slate-400">1 (S:0 / P:1)</span>
+              <span id="rekap-konstruksi" class="font-mono text-slate-400">0</span>
             </div>
             <div class="flex justify-between items-center text-slate-300">
               <span class="flex items-center gap-2"><i class="fa-solid fa-comments text-emerald-400 w-4"></i> Konsultansi</span>
-              <span class="font-mono text-slate-400">0 (S:0 / P:0)</span>
+              <span id="rekap-konsultansi" class="font-mono text-slate-400">0</span>
             </div>
             <div class="flex justify-between items-center text-slate-300">
               <span class="flex items-center gap-2"><i class="fa-solid fa-gear text-emerald-400 w-4"></i> Jasa Lainnya</span>
-              <span class="font-mono text-slate-400">0 (S:0 / P:0)</span>
+              <span id="rekap-lainnya" class="font-mono text-slate-400">0</span>
             </div>
             <div class="flex justify-between items-center text-slate-300">
               <span class="flex items-center gap-2"><i class="fa-solid fa-file-contract text-emerald-400 w-4"></i> Pasca Kontrak</span>
-              <span class="font-mono text-slate-400">2 (S:0 / P:2)</span>
+              <span id="rekap-pascakontrak" class="font-mono text-slate-400">0</span>
             </div>
           </div>
         </div>
@@ -195,9 +195,9 @@
             <h2 class="text-xs font-semibold text-amber-500 uppercase tracking-wider flex items-center gap-2">
               <i class="fa-solid fa-list-check"></i> Jawaban Konsultasi Publik
             </h2>
-            <p class="text-[10px] text-slate-400">Daftar pertanyaan dan jawaban resmi (Live Update Register Tiket)</p>
+            <p class="text-[10px] text-slate-400">Daftar pertanyaan dan jawaban resmi (Live Update dari Register Tiket)</p>
           </div>
-          <input type="text" placeholder="Cari nomor tiket, SKPK..." class="bg-slate-900 border border-slate-700 text-xs text-white px-3 py-1.5 rounded-lg focus:outline-none focus:border-cyan-500 w-full sm:w-60" />
+          <input type="text" id="search-input" placeholder="Cari nomor tiket, SKPK..." class="bg-slate-900 border border-slate-700 text-xs text-white px-3 py-1.5 rounded-lg focus:outline-none focus:border-cyan-500 w-full sm:w-60" />
         </div>
 
         <!-- TABLE HASIL -->
@@ -209,26 +209,16 @@
                 <th class="p-2.5 whitespace-nowrap">PEMOHON / SKPK</th>
                 <th class="p-2.5 whitespace-nowrap">JENIS KONSULTASI</th>
                 <th class="p-2.5">PERMASALAHAN</th>
-                <th class="p-2.5">JAWABAN TIM KLIK-PBJ</th>
+                <th class="p-2.5 text-center">JAWABAN TIM KLIK-PBJ</th>
                 <th class="p-2.5 text-center">STATUS</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800/60 text-slate-300">
-              <tr class="hover:bg-slate-800/40">
-                <td class="p-2.5 font-mono text-cyan-400 whitespace-nowrap">#TKT-001<br><span class="text-[10px] text-slate-400">01/10/2026</span></td>
-                <td class="p-2.5"><strong>Ahmad, ST</strong><br><span class="text-[10px] text-slate-400">Dinas PU</span></td>
-                <td class="p-2.5"><span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded text-[10px]">Pengadaan Barang</span></td>
-                <td class="p-2.5 max-w-[180px]">Keterlambatan pengiriman material e-purchasing...</td>
-                <td class="p-2.5 max-w-[200px]">Diberikan adendum waktu sesuai ketentuan...</td>
-                <td class="p-2.5 text-center"><span class="bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded text-[10px]">SELESAI</span></td>
-              </tr>
-              <tr class="hover:bg-slate-800/40">
-                <td class="p-2.5 font-mono text-cyan-400 whitespace-nowrap">#TKT-002<br><span class="text-[10px] text-slate-400">01/10/2026</span></td>
-                <td class="p-2.5"><strong>Budi Prasetyo</strong><br><span class="text-[10px] text-slate-400">Dinkes</span></td>
-                <td class="p-2.5"><span class="bg-blue-950 text-blue-400 border border-blue-800 px-2 py-0.5 rounded text-[10px]">Jasa Konstruksi</span></td>
-                <td class="p-2.5 max-w-[180px]">Evaluasi penawaran teknis tender gedung...</td>
-                <td class="p-2.5 max-w-[200px] text-slate-500 italic">Sedang Ditelaah Tim</td>
-                <td class="p-2.5 text-center"><span class="bg-amber-500/20 text-amber-400 font-bold px-2 py-0.5 rounded text-[10px]">PROSES</span></td>
+            <tbody id="table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <!-- Loading Indicator -->
+              <tr>
+                <td colspan="6" class="p-6 text-center text-slate-400 italic">
+                  <i class="fa-solid fa-circle-notch fa-spin text-cyan-400 mr-2"></i> Memuat data dari Google Sheets...
+                </td>
               </tr>
             </tbody>
           </table>
@@ -240,5 +230,99 @@
 
   </div>
 
+  <!-- SCRIPT API GOOGLE APPS SCRIPT -->
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbziNsZ8R2S_Tg2LdQv3zK1CkRTzVSvJTzLyiqCYJLAyhF84QjtJCSxpZXbA3oA6dyer/exec";
+
+    let rawData = [];
+
+    async function fetchSheetData() {
+      const tableBody = document.getElementById("table-body");
+
+      try {
+        const response = await fetch(API_URL);
+        const result = await response.json();
+        
+        // Ambil array data
+        rawData = Array.isArray(result) ? result : (result.data || []);
+
+        if (!rawData || rawData.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Tidak ada data ditemukan.</td></tr>`;
+          return;
+        }
+
+        renderTable(rawData);
+        updateStatistics(rawData);
+
+      } catch (error) {
+        console.error("Gagal memuat data:", error);
+        tableBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400 font-semibold">Gagal memuat data dari Google Sheets. Pastikan Apps Script di-deploy dengan akses 'Anyone'.</td></tr>`;
+      }
+    }
+
+    function renderTable(dataList) {
+      const tableBody = document.getElementById("table-body");
+      tableBody.innerHTML = "";
+
+      dataList.forEach(item => {
+        // Ambil data nilai kolom fleksibel
+        const noTiket = item["Nomor Tiket/Registrasi"] || item["Nomor Tiket"] || item.no_tiket || item[1] || "-";
+        const tglMasuk = item["Tanggal Masuk"] || item.tanggal || item[2] || "-";
+        const pemohon = item["Nama Pemohon"] || item.pemohon || item[3] || "-";
+        const skpk = item["Perangkat Daerah"] || item.skpk || item[7] || "-";
+        const jenis = item["Jenis Konsultasi"] || item.jenis || item[9] || "-";
+        const masalah = item["Permasalahan"] || item["Dokumen/Lampiran"] || item[11] || "-";
+        const status = item["Status"] || item[8] || "Proses";
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 border-b border-slate-800/60 text-slate-300";
+        tr.innerHTML = `
+          <td class="p-2.5 font-mono text-cyan-400 whitespace-nowrap">${noTiket}<br><span class="text-[10px] text-slate-400">${tglMasuk}</span></td>
+          <td class="p-2.5"><strong>${pemohon}</strong><br><span class="text-[10px] text-slate-400">${skpk}</span></td>
+          <td class="p-2.5"><span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded text-[10px] whitespace-nowrap">${jenis}</span></td>
+          <td class="p-2.5 max-w-[200px] truncate">${masalah}</td>
+          <td class="p-2.5 text-center">
+            <button class="bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 border border-amber-500/50 px-2 py-1 rounded text-[10px] font-semibold inline-flex items-center gap-1 mx-auto whitespace-nowrap">
+              <i class="fa-solid fa-eye"></i> Lihat Jawaban
+            </button>
+          </td>
+          <td class="p-2.5 text-center">
+            <span class="${String(status).toLowerCase().includes('selesai') ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'} font-bold px-2 py-0.5 rounded text-[10px]">
+              ${status}
+            </span>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function updateStatistics(dataList) {
+      const total = dataList.length;
+      let selesai = 0;
+      let proses = 0;
+
+      dataList.forEach(item => {
+        const st = String(item["Status"] || item[8] || "").toLowerCase();
+        if (st.includes("selesai")) selesai++;
+        else proses++;
+      });
+
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-selesai").textContent = selesai;
+      document.getElementById("stat-proses").textContent = proses;
+    }
+
+    // Pencarian Filter Live Search
+    document.getElementById("search-input").addEventListener("input", function(e) {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = rawData.filter(item => {
+        const str = JSON.stringify(item).toLowerCase();
+        return str.includes(keyword);
+      });
+      renderTable(filtered);
+    });
+
+    document.addEventListener("DOMContentLoaded", fetchSheetData);
+  </script>
 </body>
 </html>
