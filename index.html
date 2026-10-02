@@ -625,7 +625,7 @@
                     const tbody = document.getElementById('bodyTabelJawaban');
                     if (!tbody) return;
 
-                    tbody.innerHTML = ''; // Hapus data dummy lama
+                    tbody.innerHTML = '';
 
                     if (data.length === 0) {
                         tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Belum ada data tiket.</td></tr>';
@@ -667,7 +667,7 @@
                 .catch(err => console.error("Gagal memuat data dari Spreadsheet:", err));
         }
 
-        // 2. Fungsi Tombol "Jawab Tim" per Bidang
+        // 2. Perbaikan Fungsi Tombol "Jawab Tim" per Bidang
         function openPortalTimByBidang(bidang) {
             const kataKunciMap = {
                 'Barang': 'Pengadaan Barang',
@@ -679,21 +679,29 @@
 
             const namaLengkap = kataKunciMap[bidang] || bidang;
 
-            const targetSection = document.getElementById('bodyTabelJawaban') || document.querySelector('table');
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Scroll ke tabel jawaban
+            const targetTable = document.getElementById('bodyTabelJawaban') || document.querySelector('table');
+            if (targetTable) {
+                targetTable.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
-            const inputSearch = document.getElementById('inputSearch') || document.querySelector('input[placeholder*="Cari"]');
+            // Cari input pencarian (Mendukung ID searchJawaban maupun inputSearch)
+            const inputSearch = document.getElementById('searchJawaban') || document.getElementById('inputSearch') || document.querySelector('input[type="search"]') || document.querySelector('input[placeholder*="Cari"]');
+            
             if (inputSearch) {
                 inputSearch.value = namaLengkap;
-                filterTable();
+                
+                // Jalankan fungsi filter
+                if (typeof filterTable === 'function') {
+                    filterTable();
+                } else {
+                    inputSearch.dispatchEvent(new Event('input', { bubbles: true }));
+                }
             }
         }
 
         // Jalankan saat halaman dibuka
-        document.addEventListener('DOMContentLoaded', muatDataDariSheet);
-        
+        document.addEventListener('DOMContentLoaded', muatDataDariSheet);        
     </script>
 </body>
 </html>
