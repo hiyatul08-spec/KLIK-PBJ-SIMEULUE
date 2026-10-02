@@ -976,52 +976,56 @@
         }
 
         function submitFormKeSheet(e) {
-            e.preventDefault();
+    e.preventDefault();
 
-            const formData = new URLSearchParams();
-            formData.append('action', 'buatTiket');
-            
-            // Ambil bidang dari input hidden atau variabel global bidang yang aktif
-            const bidangInput = document.getElementById('inputBidang')?.value || bidangAktifTerpilih || 'Pengadaan Barang';
-            
-            formData.append('jenisKonsultasi', bidangInput);
-            formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
-            formData.append('nip', document.getElementById('inputNip')?.value || '');
-            formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
-            formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
-            formData.append('whatsapp', document.getElementById('inputWhatsapp')?.value || document.getElementById('inputWa')?.value || '');
-            formData.append('email', document.getElementById('inputEmail')?.value || '');
-            formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
-            formData.append('metode', document.getElementById('selectMetode')?.value || '');
-            formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || document.getElementById('inputPaket')?.value || '');
-            formData.append('pagu', document.getElementById('inputPagu')?.value || '');
-            formData.append('uraian', document.getElementById('inputUraian')?.value || document.getElementById('textareaUraian')?.value || '');
-            formData.append('solusi', document.getElementById('inputSolusi')?.value || document.getElementById('textareaSolusi')?.value || '');
-            formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
-            formData.append('status', 'Sedang dikerjakan');
+    const formData = new URLSearchParams();
+    formData.append('action', 'buatTiket');
+    
+    // Kelengkapan Data Pemohon & Tiket
+    formData.append('jenisKonsultasi', document.getElementById('inputBidang')?.value || bidangAktifTerpilih || 'Pengadaan Barang');
+    formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
+    formData.append('nip', document.getElementById('inputNip')?.value || '');
+    formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
+    formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
+    formData.append('whatsapp', document.getElementById('inputWa')?.value || document.getElementById('inputWhatsapp')?.value || '');
+    formData.append('email', document.getElementById('inputEmail')?.value || '');
+    
+    // Kelengkapan Paket & Permasalahan
+    formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
+    formData.append('metode', document.getElementById('selectMetode')?.value || '');
+    formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || '');
+    formData.append('pagu', document.getElementById('inputPagu')?.value || '');
+    formData.append('uraian', document.getElementById('textareaUraian')?.value || document.getElementById('inputUraian')?.value || '');
+    formData.append('solusi', document.getElementById('textareaSolusi')?.value || document.getElementById('inputSolusi')?.value || '');
+    
+    // Media Konsultasi & Dokumen
+    formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
+    const fileInput = document.getElementById('inputFile');
+    formData.append('adaLampiran', (fileInput && fileInput.files.length > 0) ? 'Ada' : 'Tidak');
 
-            fetch(SPREADSHEET_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
-            })
-            .then(() => {
-                alert('Tiket berhasil terdaftar dan dikirim!');
-                tutupModalBuat();
-                if (e.target && e.target.reset) e.target.reset();
+    fetch(SPREADSHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
+    })
+    .then(() => {
+        alert('Tiket berhasil terdaftar dan data lengkap dikirim!');
+        tutupModalBuat();
+        if (e.target && e.target.reset) e.target.reset();
+        
+        setTimeout(() => {
+            muatDataDariSheet();
+        }, 1500);
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Gagal mengirim data. Silakan coba lagi.');
+    });
+}        
                 
-                setTimeout(() => {
-                    muatDataDariSheet();
-                }, 1500);
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Gagal mengirim data. Silakan coba lagi.');
-            });
-        }
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
