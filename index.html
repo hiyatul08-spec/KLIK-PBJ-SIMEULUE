@@ -687,5 +687,48 @@
 
         document.addEventListener('DOMContentLoaded', muatDataDariSheet);        
     </script>
+
+    <!-- MODAL DETAIL JAWABAN (PERSIS GAMBAR 2) -->
+<div id="modalDetailTiket" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#182238] border border-slate-700/60 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative text-slate-100">
+        <!-- Tombol Close (X) -->
+        <button onclick="tutupModalDetail()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl transition-colors cursor-pointer">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Header Tiket -->
+        <div class="mb-4">
+            <h3 id="modalNoTiket" class="text-xl font-bold text-amber-400 font-mono mb-1">#TKT-001</h3>
+            <p id="modalPemohon" class="text-slate-300 font-semibold text-sm">Ahmad, ST (Dinas PU)</p>
+            <div class="mt-2">
+                <span id="modalJenis" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2.5 py-1 rounded-md font-semibold inline-block">
+                    Pengadaan Barang
+                </span>
+            </div>
+        </div>
+
+        <!-- Section Permasalahan -->
+        <div class="mb-4">
+            <label class="block text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-2">PERMASALAHAN:</label>
+            <div class="bg-[#0f172a] border border-slate-700/50 rounded-xl p-4 text-sm text-slate-300 leading-relaxed" id="modalPermasalahan">
+                -
+            </div>
+        </div>
+
+        <!-- Section Jawaban Tim KLIK-PBJ -->
+        <div class="mb-6">
+            <label class="block text-[11px] font-bold tracking-wider text-sky-400 uppercase mb-2">TANGGAPAN / JAWABAN TIM KLIK-PBJ:</label>
+            <div class="bg-[#0f172a] border border-slate-700/50 rounded-xl p-4 text-sm text-amber-300 font-medium leading-relaxed" id="modalJawaban">
+                -
+            </div>
+        </div>
+
+        <!-- Tombol Tutup -->
+        <button onclick="tutupModalDetail()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl transition-colors cursor-pointer text-sm">
+            Tutup
+        </button>
+    </div>
+</div>
+    
 </body>
 </html>
