@@ -599,7 +599,11 @@
 
     <!-- JAVASCRIPT LOGIK & INTEGRASI -->
     <script>
-        const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyn44bly-ypasQcyOuk5y9t2qeThDHIpELKyi-ljNHBLiaOYydg-8EorluCkJAWts5X/exec";            "Barang": "adminbarang",
+        const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyn44bly-ypasQcyOuk5y9t2qeThDHIpELKyi-ljNHBLiaOYydg-8EorluCkJAWts5X/exec";
+
+        // Daftar PIN Akses Tim Admin per Bidang
+        const PIN_BIDANG = {
+            "Barang": "adminbarang",
             "Jasa Konstruksi": "adminkonstruksi",
             "Jasa Konsultansi": "adminkonsultasi",
             "Jasa Lainnya": "adminjasalain",
@@ -614,26 +618,38 @@
             const modal = document.getElementById('modalBuatTiket');
             if (modal) {
                 modal.classList.remove('hidden');
-                document.getElementById('inputBidang').value = bidang;
-                document.getElementById('modalTitleForm').innerText = 'FORMULIR PENGAJUAN KONSULTASI: ' + bidang.toUpperCase();
+                const inputBidang = document.getElementById('inputBidang');
+                if (inputBidang) inputBidang.value = bidang;
+                
+                const title = document.getElementById('modalTitleForm');
+                if (title) title.innerText = 'FORMULIR PENGAJUAN KONSULTASI: ' + bidang.toUpperCase();
             }
         }
 
         function tutupModalBuat() {
-            document.getElementById('modalBuatTiket').classList.add('hidden');
+            const modal = document.getElementById('modalBuatTiket');
+            if (modal) modal.classList.add('hidden');
         }
 
         // 2. MODAL PIN TIM (BERLAKU DINAMIS UNTUK SEMUA BIDANG)
         function bukaModalPin(bidang) {
             bidangAktifTerpilih = bidang;
-            document.getElementById('subJudulPinBidang').innerText = 'Bidang: ' + bidang;
-            document.getElementById('inputPinAkses').value = '';
-            document.getElementById('pesanPinSalah').classList.add('hidden');
-            document.getElementById('modalPinTim').classList.remove('hidden');
+            const subJudul = document.getElementById('subJudulPinBidang');
+            if (subJudul) subJudul.innerText = 'Bidang: ' + bidang;
+
+            const inputPin = document.getElementById('inputPinAkses');
+            if (inputPin) inputPin.value = '';
+
+            const pesanError = document.getElementById('pesanPinSalah');
+            if (pesanError) pesanError.classList.add('hidden');
+
+            const modalPin = document.getElementById('modalPinTim');
+            if (modalPin) modalPin.classList.remove('hidden');
         }
 
         function tutupModalPin() {
-            document.getElementById('modalPinTim').classList.add('hidden');
+            const modalPin = document.getElementById('modalPinTim');
+            if (modalPin) modalPin.classList.add('hidden');
         }
 
         // VERIFIKASI PIN SESUAI BIDANG YANG DIKLIK
@@ -648,8 +664,10 @@
                 tutupModalPin();
                 bukaModalJawab(bidangAktifTerpilih);
             } else {
-                pesanError.innerText = `PIN untuk bidang ${bidangAktifTerpilih} salah!`;
-                pesanError.classList.remove('hidden');
+                if (pesanError) {
+                    pesanError.innerText = `PIN untuk bidang ${bidangAktifTerpilih} salah!`;
+                    pesanError.classList.remove('hidden');
+                }
             }
         }
 
@@ -692,11 +710,13 @@
                 }
             }
 
-            document.getElementById('modalJawabTim').classList.remove('hidden');
+            const modalJawab = document.getElementById('modalJawabTim');
+            if (modalJawab) modalJawab.classList.remove('hidden');
         }
 
         function tutupModalJawab() {
-            document.getElementById('modalJawabTim').classList.add('hidden');
+            const modalJawab = document.getElementById('modalJawabTim');
+            if (modalJawab) modalJawab.classList.add('hidden');
         }
 
         function updateUraianPermasalahan(selectEl) {
@@ -704,10 +724,12 @@
             const item = dataTiketGlobal.find(d => d.nomorTiket === noTiket);
             const box = document.getElementById('boxUraianPermasalahan');
 
-            if (item) {
-                box.innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
-            } else {
-                box.innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+            if (box) {
+                if (item) {
+                    box.innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
+                } else {
+                    box.innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+                }
             }
         }
 
@@ -716,24 +738,29 @@
             const item = dataTiketGlobal[index];
             if (!item) return;
 
-            document.getElementById('modalNoTiket').innerText = item.nomorTiket || '-';
-            document.getElementById('modalPemohon').innerText = `${item.namaPemohon || '-'} (${item.skpk || '-'})`;
-            document.getElementById('modalJenis').innerText = item.jenisKonsultasi || 'Konsultasi';
-            document.getElementById('modalPermasalahan').innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
-            document.getElementById('modalJawaban').innerText = item.jawaban || 'Sedang Ditelaah Tim.';
+            if (document.getElementById('modalNoTiket')) document.getElementById('modalNoTiket').innerText = item.nomorTiket || '-';
+            if (document.getElementById('modalPemohon')) document.getElementById('modalPemohon').innerText = `${item.namaPemohon || '-'} (${item.skpk || '-'})`;
+            if (document.getElementById('modalJenis')) document.getElementById('modalJenis').innerText = item.jenisKonsultasi || 'Konsultasi';
+            if (document.getElementById('modalPermasalahan')) document.getElementById('modalPermasalahan').innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
+            if (document.getElementById('modalJawaban')) document.getElementById('modalJawaban').innerText = item.jawaban || 'Sedang Ditelaah Tim.';
 
-            document.getElementById('modalDetailTiket').classList.remove('hidden');
+            const modalDetail = document.getElementById('modalDetailTiket');
+            if (modalDetail) modalDetail.classList.remove('hidden');
         }
 
         function tutupModalDetail() {
-            document.getElementById('modalDetailTiket').classList.add('hidden');
+            const modalDetail = document.getElementById('modalDetailTiket');
+            if (modalDetail) modalDetail.classList.add('hidden');
         }
 
         function updateNamaFile(input) {
-            if (input.files && input.files[0]) {
-                document.getElementById('labelNamaFile').innerText = input.files[0].name;
-            } else {
-                document.getElementById('labelNamaFile').innerText = "No file chosen";
+            const label = document.getElementById('labelNamaFile');
+            if (label) {
+                if (input.files && input.files[0]) {
+                    label.innerText = input.files[0].name;
+                } else {
+                    label.innerText = "No file chosen";
+                }
             }
         }
 
@@ -742,21 +769,21 @@
             fetch(SPREADSHEET_URL)
                 .then(response => response.json())
                 .then(data => {
-                    dataTiketGlobal = data;
+                    dataTiketGlobal = data || [];
                     
-                    updateBadgeNotifikasi(data);
-                    updateRekapitulasiStatistik(data);
+                    updateBadgeNotifikasi(dataTiketGlobal);
+                    updateRekapitulasiStatistik(dataTiketGlobal);
 
                     const tbody = document.getElementById('bodyTabelJawaban');
                     if (!tbody) return;
                     tbody.innerHTML = ''; 
 
-                    if (!data || data.length === 0) {
+                    if (!dataTiketGlobal || dataTiketGlobal.length === 0) {
                         tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Belum ada data tiket.</td></tr>';
                         return;
                     }
 
-                    data.forEach((item, index) => {
+                    dataTiketGlobal.forEach((item, index) => {
                         const tr = document.createElement('tr');
                         tr.className = 'border-b border-slate-700/50 hover:bg-slate-800/40 transition-colors';
 
@@ -779,7 +806,7 @@
                                     ${item.jenisKonsultasi || 'Konsultasi'}
                                 </span>
                             </td>
-                            <td class="p-3 text-xs text-slate-300 max-w-xs truncate" title="${item.permasalahan}">${item.permasalahan || '-'}</td>
+                            <td class="p-3 text-xs text-slate-300 max-w-xs truncate" title="${item.permasalahan || ''}">${item.permasalahan || '-'}</td>
                             <td class="p-3 text-xs text-slate-400 italic max-w-xs truncate">${item.jawaban || '-'}</td>
                             <td class="p-3">
                                 <span class="${statusBg} border text-[10px] font-bold px-2 py-1 rounded capitalize">${item.status || 'PROSES'}</span>
@@ -866,10 +893,10 @@
                 }
             });
 
-            if(document.getElementById('stat-total')) document.getElementById('stat-total').innerText = total;
-            if(document.getElementById('stat-selesai')) document.getElementById('stat-selesai').innerText = selesai;
-            if(document.getElementById('stat-proses')) document.getElementById('stat-proses').innerText = proses;
-            if(document.getElementById('stat-rata')) document.getElementById('stat-rata').innerText = total > 0 ? (total / 5).toFixed(1) : 0;
+            if (document.getElementById('stat-total')) document.getElementById('stat-total').innerText = total;
+            if (document.getElementById('stat-selesai')) document.getElementById('stat-selesai').innerText = selesai;
+            if (document.getElementById('stat-proses')) document.getElementById('stat-proses').innerText = proses;
+            if (document.getElementById('stat-rata')) document.getElementById('stat-rata').innerText = total > 0 ? (total / 5).toFixed(1) : 0;
 
             for (let k in rekap) {
                 if (document.getElementById(`rekap-total-${k}`)) {
@@ -885,8 +912,12 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const base64Image = e.target.result;
-                    document.getElementById('headerLogoImg').src = base64Image;
-                    document.getElementById('namaFileBanner').innerText = input.files[0].name;
+                    const img = document.getElementById('headerLogoImg');
+                    if (img) img.src = base64Image;
+                    
+                    const name = document.getElementById('namaFileBanner');
+                    if (name) name.innerText = input.files[0].name;
+
                     localStorage.setItem("klikPbjLogoHeader", base64Image);
                     localStorage.setItem("klikPbjLogoFileName", input.files[0].name);
                 }
@@ -903,88 +934,94 @@
             });
         }
 
-       function simpanJawabanTim() {
-        const selectTiket = document.getElementById('selectTiketProses');
-        const noTiket = selectTiket ? selectTiket.value : '';
-        const jawaban = document.getElementById('inputTextJawabanTim').value;
+        function simpanJawabanTim() {
+            const selectTiket = document.getElementById('selectTiketProses');
+            const noTiket = selectTiket ? selectTiket.value : '';
+            const jawabanEl = document.getElementById('inputTextJawabanTim');
+            const jawaban = jawabanEl ? jawabanEl.value : '';
 
-        if (!noTiket) {
-            alert('Pilih tiket terlebih dahulu!');
-            return;
-        }
-        if (!jawaban.trim()) {
-            alert('Ketikkan jawaban terlebih dahulu!');
-            return;
-        }
+            if (!noTiket) {
+                alert('Pilih tiket terlebih dahulu!');
+                return;
+            }
+            if (!jawaban.trim()) {
+                alert('Ketikkan jawaban terlebih dahulu!');
+                return;
+            }
 
-        // Kirim perubahan jawaban ke Google Apps Script
-        fetch(SPREADSHEET_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                action: 'jawabTiket',
-                nomorTiket: noTiket,
-                jawaban: jawaban
+            // Kirim perubahan jawaban ke Google Apps Script
+            fetch(SPREADSHEET_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8' // Menghindari preflight CORS pada Apps Script
+                },
+                body: JSON.stringify({
+                    action: 'jawabTiket',
+                    nomorTiket: noTiket,
+                    jawaban: jawaban
+                })
             })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert('Jawaban berhasil dikirim dan status tiket di Google Sheet otomatis menjadi SELESAI!');
-            tutupModalJawab();
-            document.getElementById('inputTextJawabanTim').value = '';
-            
-            // Memuat ulang data agar angka rekapitulasi ter-update otomatis
-            muatDataDariSheet();
-        })
-        .catch(err => {
-            console.error(err);
-            alert('Gagal memperbarui data di Google Sheet.');
-        });
-    }
+            .then(res => res.json())
+            .then(data => {
+                alert('Jawaban berhasil dikirim dan status tiket di Google Sheet otomatis menjadi SELESAI!');
+                tutupModalJawab();
+                if (jawabanEl) jawabanEl.value = '';
+                
+                // Memuat ulang data agar angka rekapitulasi ter-update otomatis
+                muatDataDariSheet();
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Gagal memperbarui data di Google Sheet.');
+            });
+        }
 
         function submitFormKeSheet(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    const formData = new URLSearchParams();
-    formData.append('action', 'buatTiket');
-    
-    // Membaca ID yang sesuai dengan HTML kamu
-    formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
-    formData.append('nip', document.getElementById('inputNip')?.value || '');
-    formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
-    formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
-    formData.append('whatsapp', document.getElementById('inputWhatsapp')?.value || document.getElementById('inputWa')?.value || '');
-    formData.append('email', document.getElementById('inputEmail')?.value || '');
-    formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
-    formData.append('metode', document.getElementById('selectMetode')?.value || '');
-    formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || document.getElementById('inputPaket')?.value || '');
-    formData.append('pagu', document.getElementById('inputPagu')?.value || '');
-    formData.append('uraian', document.getElementById('inputUraian')?.value || document.getElementById('textareaUraian')?.value || '');
-    formData.append('solusi', document.getElementById('inputSolusi')?.value || document.getElementById('textareaSolusi')?.value || '');
-    formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
-    formData.append('status', 'Sedang dikerjakan');
+            const formData = new URLSearchParams();
+            formData.append('action', 'buatTiket');
+            
+            // Mengambil bidang/jenis konsultasi
+            formData.append('jenisKonsultasi', document.getElementById('inputBidang')?.value || '');
+            formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
+            formData.append('nip', document.getElementById('inputNip')?.value || '');
+            formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
+            formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
+            formData.append('whatsapp', document.getElementById('inputWhatsapp')?.value || document.getElementById('inputWa')?.value || '');
+            formData.append('email', document.getElementById('inputEmail')?.value || '');
+            formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
+            formData.append('metode', document.getElementById('selectMetode')?.value || '');
+            formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || document.getElementById('inputPaket')?.value || '');
+            formData.append('pagu', document.getElementById('inputPagu')?.value || '');
+            formData.append('uraian', document.getElementById('inputUraian')?.value || document.getElementById('textareaUraian')?.value || '');
+            formData.append('solusi', document.getElementById('inputSolusi')?.value || document.getElementById('textareaSolusi')?.value || '');
+            formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
+            formData.append('status', 'Sedang dikerjakan');
 
-    fetch(SPREADSHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formData.toString()
-    })
-    .then(() => {
-        alert('Tiket berhasil terdaftar dan dikirim!');
-        tutupModalBuat();
-        if (e.target && e.target.reset) e.target.reset();
-        
-        setTimeout(() => {
-            muatDataDariSheet();
-        }, 1500);
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Gagal mengirim data. Silakan coba lagi.');
-    });
-}
+            fetch(SPREADSHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(() => {
+                alert('Tiket berhasil terdaftar dan dikirim!');
+                tutupModalBuat();
+                if (e.target && e.target.reset) e.target.reset();
+                
+                setTimeout(() => {
+                    muatDataDariSheet();
+                }, 1500);
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Gagal mengirim data. Silakan coba lagi.');
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
@@ -993,8 +1030,6 @@
 
             muatDataDariSheet();
         });
-
-      
     </script>
 </body>
 </html>
