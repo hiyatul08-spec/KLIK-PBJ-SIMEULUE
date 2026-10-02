@@ -670,6 +670,14 @@
             }
         }
 
+// Fitur Tekan Enter pada Input PIN
+    document.getElementById('inputPinAkses')?.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            verifikasiPinDanBukaForm();
+        }
+    });
+        
         // 3. MODAL FORM JAWAB TIM (SETELAH PIN VERIFIED)
         function bukaModalJawab(bidang) {
             if (document.getElementById('judulBidangJawab')) {
