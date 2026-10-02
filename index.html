@@ -975,32 +975,43 @@
     });
 }
         function submitFormKeSheet(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
+
+    // Fungsi pembantu untuk mengambil nilai dari beberapa kemungkinan ID elemen
+    function getVal(idList) {
+        for (let id of idList) {
+            let el = document.getElementById(id);
+            if (el && el.value && el.value.trim() !== '') {
+                return el.value.trim();
+            }
+        }
+        return '';
+    }
 
     const formData = new URLSearchParams();
     formData.append('action', 'buatTiket');
     
-    // Kelengkapan Data Pemohon & Tiket
-    formData.append('jenisKonsultasi', document.getElementById('inputBidang')?.value || bidangAktifTerpilih || 'Pengadaan Barang');
-    formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
-    formData.append('nip', document.getElementById('inputNip')?.value || '');
-    formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
-    formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
-    formData.append('whatsapp', document.getElementById('inputWa')?.value || document.getElementById('inputWhatsapp')?.value || '');
-    formData.append('email', document.getElementById('inputEmail')?.value || '');
+    // Ambil Jabatan & SKPK dari semua kemungkinan ID HTML
+    const jabatanVal = getVal(['selectJabatan', 'inputJabatan', 'jabatan', 'txtJabatan']);
+    const skpkVal = getVal(['selectSkpk', 'inputSkpk', 'skpk', 'txtSkpk', 'selectPerangkatDaerah']);
     
-    // Kelengkapan Paket & Permasalahan
-    formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
-    formData.append('metode', document.getElementById('selectMetode')?.value || '');
-    formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || '');
-    formData.append('pagu', document.getElementById('inputPagu')?.value || '');
-    formData.append('uraian', document.getElementById('textareaUraian')?.value || document.getElementById('inputUraian')?.value || '');
-    formData.append('solusi', document.getElementById('textareaSolusi')?.value || document.getElementById('inputSolusi')?.value || '');
+    // Ambil Data Pemohon & Kontak
+    formData.append('namaPemohon', getVal(['inputNama', 'nama', 'namaPemohon']));
+    formData.append('nip', getVal(['inputNip', 'nip', 'nipIdentitas']));
+    formData.append('jabatan', jabatanVal || '-');
+    formData.append('skpk', skpkVal || '-');
+    formData.append('whatsapp', getVal(['inputWa', 'whatsapp', 'inputWhatsapp', 'noWa']));
+    formData.append('email', getVal(['inputEmail', 'email']));
     
-    // Media Konsultasi & Dokumen
-    formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
-    const fileInput = document.getElementById('inputFile');
-    formData.append('adaLampiran', (fileInput && fileInput.files.length > 0) ? 'Ada' : 'Tidak');
+    // Ambil Detail Konsultasi & Dokumen
+    formData.append('jenisKonsultasi', getVal(['inputBidang', 'jenisKonsultasi', 'selectJenisKonsultasi']) || (typeof bidangAktifTerpilih !== 'undefined' ? bidangAktifTerpilih : 'Perencanaan PBJ'));
+    formData.append('bentukKonsultasi', getVal(['selectBentukKonsultasi', 'mediaKonsultasi', 'selectMediaKonsultasi']) || 'Tatap Muka / Langsung');
+    
+    const fileInput = document.getElementById('inputFile') || document.getElementById('dokumenLampiran');
+    formData.append('adaLampiran', (fileInput && fileInput.files && fileInput.files.length > 0) ? 'Ada' : 'Tidak');
+    
+    formData.append('uraian', getVal(['textareaUraian', 'inputUraian', 'uraianPermasalahan', 'permasalahan']));
+    formData.append('solusi', getVal(['textareaSolusi', 'inputSolusi', 'catatan', 'solusiAwal']));
 
     fetch(SPREADSHEET_URL, {
         method: 'POST',
@@ -1011,12 +1022,12 @@
         body: formData.toString()
     })
     .then(() => {
-        alert('Tiket berhasil terdaftar dan data lengkap dikirim!');
-        tutupModalBuat();
-        if (e.target && e.target.reset) e.target.reset();
+        alert('Tiket berhasil dikirim!');
+        if (typeof tutupModalBuat === 'function') tutupModalBuat();
+        if (e && e.target && typeof e.target.reset === 'function') e.target.reset();
         
         setTimeout(() => {
-            muatDataDariSheet();
+            if (typeof muatDataDariSheet === 'function') muatDataDariSheet();
         }, 1500);
     })
     .catch(err => {
