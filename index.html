@@ -745,6 +745,118 @@
         </button>
     </div>
 </div>
+
+    <script>
+    // URL Web App Google Apps Script
+    const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbzayOIao3-SdZ0j2yWWL0Bh8a-uL9t1UrjAucpOTPcpPNZH_l82D68GI4AH7G2Xo7RC/exec";
+    let dataTiketGlobal = [];
+
+    // FUNGSI UTAMA MENGAMBIL DATA DARI APPS SCRIPT
+    function muatDataDariSheet() {
+        fetch(SPREADSHEET_URL)
+            .then(response => response.json())
+            .then(data => {
+                dataTiketGlobal = data;
+                
+                // 1. UPDATE BADGE MERAH
+                updateBadgeNotifikasi(data);
+
+                // 2. TAMPILKAN TABEL UTAMA JAWABAN KONSULTASI
+                const tbody = document.getElementById('bodyTabelJawaban') || document.querySelector('tbody');
+                if (!tbody) return;
+                tbody.innerHTML = ''; 
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Belum ada data tiket.</td></tr>';
+                    return;
+                }
+
+                data.forEach((item, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-slate-700/50 hover:bg-slate-800/40 transition-colors';
+
+                    let statusBg = 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+                    if ((item.status || '').toLowerCase().includes('selesai')) {
+                        statusBg = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+                    }
+                    
+                    tr.innerHTML = `
+                        <td class="p-3 text-xs text-slate-300 font-mono">
+                            <span class="font-bold text-amber-300">${item.nomorTiket || '-'}</span><br>
+                            <span class="text-[10px] text-slate-400">${item.tanggal || '-'}</span>
+                        </td>
+                        <td class="p-3">
+                            <div class="font-bold text-sm text-white">${item.namaPemohon || '-'}</div>
+                            <div class="text-xs text-slate-400">${item.skpk || '-'}</div>
+                        </td>
+                        <td class="p-3">
+                            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2.5 py-1 rounded-md font-semibold inline-block">
+                                ${item.jenisKonsultasi || 'Konsultasi'}
+                            </span>
+                        </td>
+                        <td class="p-3 text-xs text-slate-300 max-w-xs truncate" title="${item.permasalahan}">${item.permasalahan || '-'}</td>
+                        <td class="p-3 text-xs text-slate-400 italic max-w-xs truncate">${item.jawaban || '-'}</td>
+                        <td class="p-3">
+                            <span class="${statusBg} border text-[10px] font-bold px-2 py-1 rounded capitalize">${item.status || 'PROSES'}</span>
+                        </td>
+                        <td class="p-3">
+                            <button onclick="bukaDetailJawaban(${index})" class="bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow transition-all cursor-pointer">
+                                <i class="fas fa-eye"></i> Lihat Jawaban
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(err => console.error("Gagal mengambil data dari Google Sheet:", err));
+    }
+
+    // FUNGSI UPDATE BADGE NOTIFIKASI ANGKA MERAH
+    function updateBadgeNotifikasi(data) {
+        const hitungBelumJawab = {
+            Barang: 0,
+            Konstruksi: 0,
+            Konsultansi: 0,
+            Lainnya: 0,
+            Pasca: 0
+        };
+
+        data.forEach(item => {
+            const jenis = (item.jenisKonsultasi || "").toLowerCase();
+            const status = (item.status || "").toLowerCase();
+            
+            // Tiket dihitung jika statusnya BUKAN selesai
+            if (!status.includes("selesai")) {
+                if (jenis.includes("barang")) hitungBelumJawab.Barang++;
+                else if (jenis.includes("konstruksi")) hitungBelumJawab.Konstruksi++;
+                else if (jenis.includes("konsultansi")) hitungBelumJawab.Konsultansi++;
+                else if (jenis.includes("lainnya")) hitungBelumJawab.Lainnya++;
+                else if (jenis.includes("pasca")) hitungBelumJawab.Pasca++;
+            }
+        });
+
+        tampilkanBadge('badgeBarang', hitungBelumJawab.Barang);
+        tampilkanBadge('badgeKonstruksi', hitungBelumJawab.Konstruksi);
+        tampilkanBadge('badgeKonsultansi', hitungBelumJawab.Konsultansi);
+        tampilkanBadge('badgeLainnya', hitungBelumJawab.Lainnya);
+        tampilkanBadge('badgePasca', hitungBelumJawab.Pasca);
+    }
+
+    function tampilkanBadge(elementId, jumlah) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        
+        if (jumlah > 0) {
+            el.innerText = jumlah;
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    }
+
+    // Jalankan fungsi otomatis saat halaman selesai dimuat
+    document.addEventListener('DOMContentLoaded', muatDataDariSheet);
+</script>
     
 </body>
 </html>
