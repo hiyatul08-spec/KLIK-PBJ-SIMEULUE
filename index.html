@@ -947,41 +947,45 @@
         function submitFormKeSheet(e) {
     e.preventDefault();
 
-    const payload = {
-        action: 'buatTiket',
-        namaPemohon: document.getElementById('inputNamaPemohon')?.value || '',
-        nip: document.getElementById('inputNip')?.value || '',
-        jabatan: document.getElementById('selectJabatan')?.value || '',
-        skpk: document.getElementById('selectSkpk')?.value || '',
-        whatsapp: document.getElementById('inputWhatsapp')?.value || '',
-        email: document.getElementById('inputEmail')?.value || '',
-        tahapan: document.getElementById('selectTahapan')?.value || '',
-        metode: document.getElementById('selectMetode')?.value || '',
-        namaPaket: document.getElementById('inputNamaPaket')?.value || '',
-        pagu: document.getElementById('inputPagu')?.value || '',
-        uraian: document.getElementById('inputUraian')?.value || '',
-        solusi: document.getElementById('inputSolusi')?.value || '',
-        bentukKonsultasi: document.getElementById('selectBentukKonsultasi')?.value || '',
-        status: 'Sedang dikerjakan'
-    };
+    const formData = new URLSearchParams();
+    formData.append('action', 'buatTiket');
+    
+    // Membaca ID yang sesuai dengan HTML kamu
+    formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
+    formData.append('nip', document.getElementById('inputNip')?.value || '');
+    formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
+    formData.append('skpk', document.getElementById('selectSkpk')?.value || '');
+    formData.append('whatsapp', document.getElementById('inputWhatsapp')?.value || document.getElementById('inputWa')?.value || '');
+    formData.append('email', document.getElementById('inputEmail')?.value || '');
+    formData.append('tahapan', document.getElementById('selectTahapan')?.value || '');
+    formData.append('metode', document.getElementById('selectMetode')?.value || '');
+    formData.append('namaPaket', document.getElementById('inputNamaPaket')?.value || document.getElementById('inputPaket')?.value || '');
+    formData.append('pagu', document.getElementById('inputPagu')?.value || '');
+    formData.append('uraian', document.getElementById('inputUraian')?.value || document.getElementById('textareaUraian')?.value || '');
+    formData.append('solusi', document.getElementById('inputSolusi')?.value || document.getElementById('textareaSolusi')?.value || '');
+    formData.append('bentukKonsultasi', document.getElementById('selectBentukKonsultasi')?.value || '');
+    formData.append('status', 'Sedang dikerjakan');
 
     fetch(SPREADSHEET_URL, {
         method: 'POST',
-        body: JSON.stringify(payload)
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(() => {
         alert('Tiket berhasil terdaftar dan dikirim!');
         tutupModalBuat();
         if (e.target && e.target.reset) e.target.reset();
-        muatDataDariSheet();
+        
+        setTimeout(() => {
+            muatDataDariSheet();
+        }, 1500);
     })
     .catch(err => {
         console.error(err);
-        // Tetap reload data jika respon terkena mode no-cors
-        alert('Tiket telah dikirim!');
-        tutupModalBuat();
-        setTimeout(muatDataDariSheet, 1500);
+        alert('Gagal mengirim data. Silakan coba lagi.');
     });
 }
         document.addEventListener('DOMContentLoaded', () => {
