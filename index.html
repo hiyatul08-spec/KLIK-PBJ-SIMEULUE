@@ -309,7 +309,7 @@
         </div>
     </div>
 
-    <!-- MODAL FORMULIR PENGAJUAN KONSULTASI (PERSIS SEPERTI GAMBAR DILAMPIRKAN) -->
+    <!-- MODAL FORMULIR PENGAJUAN KONSULTASI (PERSIS PERTANYAAN/GAMBAR MOCKUP) -->
     <div id="modalBuatTiket" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-[#182238] border border-slate-700/80 rounded-2xl max-w-2xl w-full p-6 space-y-4 shadow-2xl relative my-6 text-slate-100">
             
@@ -351,24 +351,40 @@
                             <label class="block text-slate-300 font-semibold mb-1">Jabatan *</label>
                             <select id="inputJabatan" required class="w-full bg-[#1e293b] border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-emerald-400 focus:outline-none cursor-pointer">
                                 <option value="">-- Pilih Jabatan --</option>
-                                <option value="PPK">PPK (Pejabat Pembuat Komitmen)</option>
-                                <option value="PPTK">PPTK</option>
+                                <option value="PA">PA</option>
+                                <option value="KPA">KPA</option>
+                                <option value="PPK">PPK</option>
                                 <option value="Pejabat Pengadaan">Pejabat Pengadaan</option>
                                 <option value="Pokja Pemilihan">Pokja Pemilihan</option>
-                                <option value="KPA/PA">KPA / PA</option>
-                                <option value="Penyedia/Lainnya">Penyedia / Lainnya</option>
+                                <option value="PPTK">PPTK</option>
+                                <option value="Bendahara">Bendahara</option>
+                                <option value="Pengelola PBJ">Pengelola PBJ</option>
+                                <option value="Pejabat/Pegawai SKPK">Pejabat/Pegawai SKPK</option>
+                                <option value="Penyedia">Penyedia</option>
+                                <option value="Pelaku Usaha">Pelaku Usaha</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-slate-300 font-semibold mb-1">Nama SKPK / Instansi *</label>
                             <select id="inputSkpk" required class="w-full bg-[#1e293b] border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-emerald-400 focus:outline-none cursor-pointer">
                                 <option value="">-- Pilih SKPK / Instansi --</option>
-                                <option value="Dinas Pekerjaan Umum dan Penataan Ruang">Dinas Pekerjaan Umum dan Penataan Ruang</option>
-                                <option value="Dinas Pendidikan">Dinas Pendidikan</option>
-                                <option value="Dinas Kesehatan">Dinas Kesehatan</option>
-                                <option value="Badan Pengelolaan Keuangan Daerah">Badan Pengelolaan Keuangan Daerah</option>
                                 <option value="Sekretariat Daerah">Sekretariat Daerah</option>
-                                <option value="SKPK / Instansi Lainnya">SKPK / Instansi Lainnya</option>
+                                <option value="BAPPEDA">BAPPEDA</option>
+                                <option value="Dinas PUPR">Dinas PUPR</option>
+                                <option value="Dinas Kesehatan">Dinas Kesehatan</option>
+                                <option value="Dinas Pendidikan">Dinas Pendidikan</option>
+                                <option value="Dinas Perhubungan">Dinas Perhubungan</option>
+                                <option value="Dinas Sosial">Dinas Sosial</option>
+                                <option value="Dinas Pertanian">Dinas Pertanian</option>
+                                <option value="Dinas Perikanan">Dinas Perikanan</option>
+                                <option value="DP3AKB">DP3AKB</option>
+                                <option value="BKPSDM Kab. Simeulue">BKPSDM Kab. Simeulue</option>
+                                <option value="Kecamatan">Kecamatan</option>
+                                <option value="RSUD">RSUD</option>
+                                <option value="Sekretariat DPRD">Sekretariat DPRD</option>
+                                <option value="Inspektorat">Inspektorat</option>
+                                <option value="SKPK Lainnya">SKPK Lainnya</option>
                             </select>
                         </div>
                     </div>
@@ -397,9 +413,17 @@
                             <select id="inputTahapan" class="w-full bg-[#1e293b] border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-emerald-400 focus:outline-none cursor-pointer">
                                 <option value="Identifikasi kebutuhan">Identifikasi kebutuhan</option>
                                 <option value="Perencanaan Pengadaan">Perencanaan Pengadaan</option>
+                                <option value="Persiapan Pengadaan">Persiapan Pengadaan</option>
                                 <option value="Persiapan Pemilihan">Persiapan Pemilihan</option>
+                                <option value="Pelaksanaan Pemilihan Penyedia">Pelaksanaan Pemilihan Penyedia</option>
+                                <option value="Penetapan/Penandatanganan Kontrak">Penetapan/Penandatanganan Kontrak</option>
                                 <option value="Pelaksanaan Kontrak">Pelaksanaan Kontrak</option>
-                                <option value="Serah Terima Pekerjaan">Serah Terima Pekerjaan</option>
+                                <option value="Perubahan Kontrak">Perubahan Kontrak</option>
+                                <option value="Pengendalian Kontrak">Pengendalian Kontrak</option>
+                                <option value="Serah Terima Hasil Pekerjaan">Serah Terima Hasil Pekerjaan</option>
+                                <option value="Pembayaran">Pembayaran</option>
+                                <option value="E-Purchasing/Katalog Elektronik">E-Purchasing/Katalog Elektronik</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>
                         <div>
@@ -407,9 +431,12 @@
                             <select id="inputMetode" class="w-full bg-[#1e293b] border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-emerald-400 focus:outline-none cursor-pointer">
                                 <option value="E-Purchasing/Katalog Elektronik">E-Purchasing/Katalog Elektronik</option>
                                 <option value="Pengadaan Langsung">Pengadaan Langsung</option>
-                                <option value="Tender / Seleksi">Tender / Seleksi</option>
+                                <option value="Tender">Tender</option>
+                                <option value="Tender Cepat">Tender Cepat</option>
+                                <option value="Seleksi">Seleksi</option>
                                 <option value="Penunjukan Langsung">Penunjukan Langsung</option>
                                 <option value="Swakelola">Swakelola</option>
+                                <option value="Belum ditentukan">Belum ditentukan</option>
                             </select>
                         </div>
                     </div>
