@@ -614,6 +614,86 @@
                 row.style.display = text.includes(input) ? '' : 'none';
             });
         }
+// URL Apps Script Google Sheet
+        const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbza3HK4WvPS_d4ozyWD7Vf8OcOUjNpnoCloazEjVwd6htd6MBCFO3Pbpr3XcxC6-oCy/exec";
+
+        // 1. Fungsi memuat 9 data dari Google Sheet
+        function muatDataDariSheet() {
+            fetch(SPREADSHEET_URL)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('bodyTabelJawaban');
+                    if (!tbody) return;
+
+                    tbody.innerHTML = ''; // Hapus data dummy lama
+
+                    if (data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Belum ada data tiket.</td></tr>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'border-b border-slate-700/50 hover:bg-slate-800/40 transition-colors';
+                        
+                        tr.innerHTML = `
+                            <td class="p-3 text-xs text-slate-300 font-mono">
+                                <span class="font-bold text-amber-300">${item.nomorTiket || '-'}</span><br>
+                                <span class="text-[10px] text-slate-400">${item.tanggal || '-'}</span>
+                            </td>
+                            <td class="p-3">
+                                <div class="font-bold text-sm text-white">${item.namaPemohon || '-'}</div>
+                                <div class="text-xs text-slate-400">${item.skpk || '-'}</div>
+                            </td>
+                            <td class="p-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2.5 py-1 rounded-md font-semibold inline-block">
+                                    ${item.jenisKonsultasi || '-'}
+                                </span>
+                            </td>
+                            <td class="p-3 text-xs text-slate-300">Pertanyaan dalam proses penelaahan...</td>
+                            <td class="p-3 text-xs text-slate-400 italic">Sedang Ditelaah Tim</td>
+                            <td class="p-3">
+                                <span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2 py-1 rounded">PROSES</span>
+                            </td>
+                            <td class="p-3">
+                                <button class="bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow transition-all">
+                                    <i class="fas fa-eye"></i> Lihat Jawaban
+                                </button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(err => console.error("Gagal memuat data dari Spreadsheet:", err));
+        }
+
+        // 2. Fungsi Tombol "Jawab Tim" per Bidang
+        function openPortalTimByBidang(bidang) {
+            const kataKunciMap = {
+                'Barang': 'Pengadaan Barang',
+                'Konstruksi': 'Jasa Konstruksi',
+                'Konsultansi': 'Jasa Konsultansi',
+                'Lainnya': 'Jasa Lainnya',
+                'Pasca': 'Pasca Kontrak'
+            };
+
+            const namaLengkap = kataKunciMap[bidang] || bidang;
+
+            const targetSection = document.getElementById('bodyTabelJawaban') || document.querySelector('table');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            const inputSearch = document.getElementById('inputSearch') || document.querySelector('input[placeholder*="Cari"]');
+            if (inputSearch) {
+                inputSearch.value = namaLengkap;
+                filterTable();
+            }
+        }
+
+        // Jalankan saat halaman dibuka
+        document.addEventListener('DOMContentLoaded', muatDataDariSheet);
+        
     </script>
 </body>
 </html>
