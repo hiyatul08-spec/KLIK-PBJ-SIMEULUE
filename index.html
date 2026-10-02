@@ -587,7 +587,15 @@
     <!-- JAVASCRIPT LOGIK & INTEGRASI -->
     <script>
         const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbzayOIao3-SdZ0j2yWWL0Bh8a-uL9t1UrjAucpOTPcpPNZH_l82D68GI4AH7G2Xo7RC/exec";
-        const PIN_OTENTIKASI_TIM = "1234"; // PIN Default Tim
+
+        // PIN Masing-Masing Sub-Judul / Bidang
+        const PIN_BIDANG = {
+            "Barang": "adminbarang",
+            "Jasa Konstruksi": "adminkonstruksi",
+            "Jasa Konsultansi": "adminkonsultasi",
+            "Jasa Lainnya": "adminjasalain",
+            "Pasca Kontrak": "adminpascakontrak"
+        };
 
         let dataTiketGlobal = [];
         let bidangAktifTerpilih = "";
@@ -619,46 +627,60 @@
             document.getElementById('modalPinTim').classList.add('hidden');
         }
 
+        // VERIFIKASI PIN SESUAI BIDANG YANG DIKLIK
         function verifikasiPinDanBukaForm() {
             const pinInput = document.getElementById('inputPinAkses').value;
             const pesanError = document.getElementById('pesanPinSalah');
+            
+            // Ambil PIN resmi dari daftar bidang
+            const pinResmi = PIN_BIDANG[bidangAktifTerpilih];
 
-            if (pinInput === PIN_OTENTIKASI_TIM) {
+            if (pinInput === pinResmi) {
                 tutupModalPin();
                 bukaModalJawab(bidangAktifTerpilih);
             } else {
+                pesanError.innerText = `PIN untuk bidang ${bidangAktifTerpilih} salah!`;
                 pesanError.classList.remove('hidden');
             }
         }
 
         // 3. MODAL FORM JAWAB TIM (SETELAH PIN VERIFIED)
         function bukaModalJawab(bidang) {
-            document.getElementById('judulBidangJawab').innerText = 'Bidang: ' + bidang;
+            if (document.getElementById('judulBidangJawab')) {
+                document.getElementById('judulBidangJawab').innerText = 'Bidang: ' + bidang;
+            }
+            if (document.getElementById('modalJawabBidangTitle')) {
+                document.getElementById('modalJawabBidangTitle').innerText = 'Daftar Tiket: ' + bidang;
+            }
             
             // Populate Dropdown Tiket Sesuai Bidang
             const selectTiket = document.getElementById('selectTiketProses');
-            selectTiket.innerHTML = '<option value="">-- Pilih Tiket Dalam Proses --</option>';
-            document.getElementById('boxUraianPermasalahan').innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+            if (selectTiket) {
+                selectTiket.innerHTML = '<option value="">-- Pilih Tiket Dalam Proses --</option>';
+                if (document.getElementById('boxUraianPermasalahan')) {
+                    document.getElementById('boxUraianPermasalahan').innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+                }
 
-            const filteredData = dataTiketGlobal.filter(item => {
-                const j = (item.jenisKonsultasi || "").toLowerCase();
-                const b = bidang.toLowerCase();
-                const s = (item.status || "").toLowerCase();
-                return j.includes(b) && !s.includes("selesai");
-            });
-
-            if (filteredData.length === 0) {
-                const opt = document.createElement('option');
-                opt.value = "";
-                opt.innerText = "Tidak ada tiket belum dijawab di bidang ini";
-                selectTiket.appendChild(opt);
-            } else {
-                filteredData.forEach(item => {
-                    const opt = document.createElement('option');
-                    opt.value = item.nomorTiket;
-                    opt.innerText = `${item.nomorTiket} - ${item.namaPemohon} (${item.skpk})`;
-                    selectTiket.appendChild(opt);
+                const filteredData = dataTiketGlobal.filter(item => {
+                    const j = (item.jenisKonsultasi || "").toLowerCase();
+                    const b = bidang.toLowerCase();
+                    const s = (item.status || "").toLowerCase();
+                    return j.includes(b) && !s.includes("selesai");
                 });
+
+                if (filteredData.length === 0) {
+                    const opt = document.createElement('option');
+                    opt.value = "";
+                    opt.innerText = "Tidak ada tiket belum dijawab di bidang ini";
+                    selectTiket.appendChild(opt);
+                } else {
+                    filteredData.forEach(item => {
+                        const opt = document.createElement('option');
+                        opt.value = item.nomorTiket;
+                        opt.innerText = `${item.nomorTiket} - ${item.namaPemohon} (${item.skpk})`;
+                        selectTiket.appendChild(opt);
+                    });
+                }
             }
 
             document.getElementById('modalJawabTim').classList.remove('hidden');
@@ -835,10 +857,10 @@
                 }
             });
 
-            document.getElementById('stat-total').innerText = total;
-            document.getElementById('stat-selesai').innerText = selesai;
-            document.getElementById('stat-proses').innerText = proses;
-            document.getElementById('stat-rata').innerText = total > 0 ? (total / 5).toFixed(1) : 0;
+            if(document.getElementById('stat-total')) document.getElementById('stat-total').innerText = total;
+            if(document.getElementById('stat-selesai')) document.getElementById('stat-selesai').innerText = selesai;
+            if(document.getElementById('stat-proses')) document.getElementById('stat-proses').innerText = proses;
+            if(document.getElementById('stat-rata')) document.getElementById('stat-rata').innerText = total > 0 ? (total / 5).toFixed(1) : 0;
 
             for (let k in rekap) {
                 if (document.getElementById(`rekap-total-${k}`)) {
@@ -891,8 +913,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
-            if (savedLogo) document.getElementById('headerLogoImg').src = savedLogo;
-            if (savedFileName) document.getElementById('namaFileBanner').innerText = savedFileName;
+            if (savedLogo && document.getElementById('headerLogoImg')) document.getElementById('headerLogoImg').src = savedLogo;
+            if (savedFileName && document.getElementById('namaFileBanner')) document.getElementById('namaFileBanner').innerText = savedFileName;
 
             muatDataDariSheet();
         });
