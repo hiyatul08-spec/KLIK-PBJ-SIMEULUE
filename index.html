@@ -948,8 +948,8 @@
         function submitFormKeSheet(e) {
     e.preventDefault();
 
-    // Mengambil data dari form
-    const formData = {
+    // Kumpulkan data formulir
+    const payload = {
         action: 'buatTiket',
         namaPemohon: document.getElementById('inputNamaPemohon')?.value || '',
         nip: document.getElementById('inputNip')?.value || '',
@@ -967,26 +967,30 @@
         status: 'Sedang dikerjakan'
     };
 
-    // Kirim data ke Google Apps Script
+    // Kirim menggunakan text/plain agar menghindari isu CORS Google Apps Script
     fetch(SPREADSHEET_URL, {
         method: 'POST',
-        body: JSON.stringify(formData)
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(() => {
         alert('Tiket berhasil terdaftar dan dikirim!');
         tutupModalBuat();
-        // Reset isi formulir
-        e.target.reset();
-        // Muat ulang data agar angka rekapitulasinya langsung ter-update
-        muatDataDariSheet();
+        if (e.target && e.target.reset) e.target.reset();
+        
+        // Beri jeda 1,5 detik agar Google Sheet selesai menulis baris baru sebelum reload
+        setTimeout(() => {
+            muatDataDariSheet();
+        }, 1500);
     })
     .catch(err => {
         console.error(err);
         alert('Gagal mengirim data tiket ke Google Sheet.');
     });
 }
-
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
