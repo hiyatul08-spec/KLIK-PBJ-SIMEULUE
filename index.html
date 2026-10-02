@@ -982,8 +982,10 @@
             const formData = new URLSearchParams();
             formData.append('action', 'buatTiket');
             
-            // Mengambil bidang/jenis konsultasi
-            formData.append('jenisKonsultasi', document.getElementById('inputBidang')?.value || '');
+            // Ambil bidang dari input hidden atau variabel global bidang yang aktif
+            const bidangInput = document.getElementById('inputBidang')?.value || bidangAktifTerpilih || 'Pengadaan Barang';
+            
+            formData.append('jenisKonsultasi', bidangInput);
             formData.append('namaPemohon', document.getElementById('inputNama')?.value || '');
             formData.append('nip', document.getElementById('inputNip')?.value || '');
             formData.append('jabatan', document.getElementById('selectJabatan')?.value || '');
@@ -1021,7 +1023,6 @@
                 alert('Gagal mengirim data. Silakan coba lagi.');
             });
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
