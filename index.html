@@ -968,84 +968,12 @@
         tutupModalJawab();
         if (jawabanEl) jawabanEl.value = '';
         muatDataDariSheet();
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Gagal memperbarui data di Google Sheet.');
-    });
-}
-        
-        <script>
-    // Fungsi Pengiriman Form Buat Tiket
-    function submitFormKeSheet(e) {
-        if (e && e.preventDefault) e.preventDefault();
-
-        // Helper untuk mengambil nilai elemen berdasarkan ID
-        function getVal(id) {
-            let el = document.getElementById(id);
-            return (el && el.value && el.value.trim() !== '') ? el.value.trim() : '';
-        }
-
-        const formData = new URLSearchParams();
-        formData.append('action', 'buatTiket');
-        
-        // 1. Ambil Data Pemohon & Instansi
-        formData.append('namaPemohon', getVal('inputNama') || getVal('nama'));
-        formData.append('nip', getVal('inputNip') || getVal('nip'));
-        
-        // Mengambil Jabatan dari id="inputJabatan"
-        formData.append('jabatan', getVal('inputJabatan') || '-'); 
-        
-        // Mengambil SKPK dari id="inputSkpk" atau "inputInstansi"
-        formData.append('skpk', getVal('inputSkpk') || getVal('inputInstansi') || getVal('selectSkpk') || '-'); 
-        
-        formData.append('whatsapp', getVal('inputWa') || getVal('whatsapp'));
-        formData.append('email', getVal('inputEmail') || getVal('email'));
-        
-        // 2. Detail Konsultasi & Lampiran
-        formData.append('jenisKonsultasi', getVal('inputBidang') || (typeof bidangAktifTerpilih !== 'undefined' ? bidangAktifTerpilih : 'Perencanaan PBJ'));
-        formData.append('bentukKonsultasi', getVal('selectBentukKonsultasi') || getVal('mediaKonsultasi') || 'Tatap Muka / Langsung');
-        
-        const fileInput = document.getElementById('inputFile') || document.getElementById('dokumenLampiran');
-        formData.append('adaLampiran', (fileInput && fileInput.files && fileInput.files.length > 0) ? 'Ada' : 'Tidak');
-        
-        formData.append('uraian', getVal('textareaUraian') || getVal('inputUraian') || getVal('uraianPermasalahan'));
-        formData.append('solusi', getVal('textareaSolusi') || getVal('inputSolusi') || getVal('catatan'));
-
-        fetch(SPREADSHEET_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData.toString()
-        })
-        .then(() => {
-            alert('Tiket berhasil dikirim!');
-            if (typeof tutupModalBuat === 'function') tutupModalBuat();
-            if (e && e.target && typeof e.target.reset === 'function') e.target.reset();
-            
-            setTimeout(() => {
-                if (typeof muatDataDariSheet === 'function') muatDataDariSheet();
-            }, 1500);
-        })
-        .catch(err => {
+    }).catch(err => {
             console.error(err);
-            alert('Gagal mengirim data. Silakan coba lagi.');
+            alert('Gagal memperbarui data di Google Sheet.');
         });
     }
 
-    // Inisialisasi Aplikasi Saat Halaman Dimuat
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedLogo = localStorage.getItem("klikPbjLogoHeader");
-        const savedFileName = localStorage.getItem("klikPbjLogoFileName");
-        if (savedLogo && document.getElementById('headerLogoImg')) document.getElementById('headerLogoImg').src = savedLogo;
-        if (savedFileName && document.getElementById('namaFileBanner')) document.getElementById('namaFileBanner').innerText = savedFileName;
-
-        if (typeof muatDataDariSheet === 'function') {
-            muatDataDariSheet();
-        }
-    });
-</script>
-</body>
-</html>
+    // Fungsi Pengiriman Form Buat Tiket
+    function submitFormKeSheet(e) {
+        if (e && e.preventDefault) e.preventDefault();
