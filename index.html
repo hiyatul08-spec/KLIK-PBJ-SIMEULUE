@@ -894,15 +894,43 @@
             });
         }
 
-        function simpanJawabanTim() {
-            const jawaban = document.getElementById('inputTextJawabanTim').value;
-            if(!jawaban.trim()) {
-                alert('Ketikkan jawaban terlebih dahulu!');
-                return;
-            }
-            alert('Jawaban resmi tim berhasil dikirim!');
-            tutupModalJawab();
+       function simpanJawabanTim() {
+        const selectTiket = document.getElementById('selectTiketProses');
+        const noTiket = selectTiket ? selectTiket.value : '';
+        const jawaban = document.getElementById('inputTextJawabanTim').value;
+
+        if (!noTiket) {
+            alert('Pilih tiket terlebih dahulu!');
+            return;
         }
+        if (!jawaban.trim()) {
+            alert('Ketikkan jawaban terlebih dahulu!');
+            return;
+        }
+
+        // Kirim perubahan jawaban ke Google Apps Script
+        fetch(SPREADSHEET_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'jawabTiket',
+                nomorTiket: noTiket,
+                jawaban: jawaban
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert('Jawaban berhasil dikirim dan status tiket di Google Sheet otomatis menjadi SELESAI!');
+            tutupModalJawab();
+            document.getElementById('inputTextJawabanTim').value = '';
+            
+            // Memuat ulang data agar angka rekapitulasi ter-update otomatis
+            muatDataDariSheet();
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Gagal memperbarui data di Google Sheet.');
+        });
+    }
 
         function submitFormKeSheet(e) {
             e.preventDefault();
