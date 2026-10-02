@@ -155,94 +155,91 @@
         <!-- RIGHT CONTENT -->
         <div class="lg:col-span-8 flex flex-col gap-6">
 
-            <!-- AJUKAN KONSULTASI -->
-<div>
-    <h2 class="text-gold font-bold text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
-        <i class="fas fa-paper-plane"></i> Ajukan Konsultasi
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Pengadaan Barang -->
-        <div class="bg-btn-green p-3 rounded-xl shadow-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-3 text-slate-900 font-extrabold text-sm">
-                <div class="bg-slate-900/20 p-2 rounded-lg text-xl"><i class="fas fa-box"></i></div>
-                <span>Pengadaan Barang</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openForm('Pengadaan Barang')" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
-                </button>
-                <button onclick="filterJawabanByJenis('Pengadaan Barang')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-reply"></i> Jawab Tim
-                </button>
-            </div>
-        </div>
+            <!-- AJUKAN KONSULTASI PER BIDANG -->
+            <div class="space-y-2">
+                <h2 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fas fa-paper-plane"></i> Ajukan Konsultasi
+                </h2>
 
-        <!-- Jasa Konstruksi -->
-        <div class="bg-btn-green p-3 rounded-xl shadow-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-3 text-slate-900 font-extrabold text-sm">
-                <div class="bg-slate-900/20 p-2 rounded-lg text-xl"><i class="fas fa-hard-hat"></i></div>
-                <span>Jasa Konstruksi</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openForm('Jasa Konstruksi')" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
-                </button>
-                <button onclick="filterJawabanByJenis('Jasa Konstruksi')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-reply"></i> Jawab Tim
-                </button>
-            </div>
-        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    
+                    <!-- 1. Pengadaan Barang -->
+                    <div class="bg-emerald-400 rounded-xl p-3 text-slate-950 flex items-center justify-between shadow-md">
+                        <div class="flex items-center gap-2 font-extrabold text-sm">
+                            <i class="fas fa-box text-base"></i> Pengadaan Barang
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openFormModal('Pengadaan Barang')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1 shadow">
+                                <i class="fas fa-plus-circle"></i> Buat Tiket
+                            </button>
+                            <button onclick="openPortalTimByBidang('Barang')" class="bg-slate-950/20 hover:bg-slate-950/30 text-slate-950 border border-slate-950/30 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1">
+                                <i class="fas fa-reply"></i> Jawab Tim
+                            </button>
+                        </div>
+                    </div>
 
-        <!-- Jasa Konsultasi -->
-        <div class="bg-btn-green p-3 rounded-xl shadow-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-3 text-slate-900 font-extrabold text-sm">
-                <div class="bg-slate-900/20 p-2 rounded-lg text-xl"><i class="fas fa-comments"></i></div>
-                <span>Jasa Konsultasi</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openForm('Jasa Konsultasi')" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
-                </button>
-                <button onclick="filterJawabanByJenis('Jasa Konsultasi')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-reply"></i> Jawab Tim
-                </button>
-            </div>
-        </div>
+                    <!-- 2. Jasa Konstruksi -->
+                    <div class="bg-emerald-400 rounded-xl p-3 text-slate-950 flex items-center justify-between shadow-md">
+                        <div class="flex items-center gap-2 font-extrabold text-sm">
+                            <i class="fas fa-hard-hat text-base"></i> Jasa Konstruksi
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openFormModal('Jasa Konstruksi')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1 shadow">
+                                <i class="fas fa-plus-circle"></i> Buat Tiket
+                            </button>
+                            <button onclick="openPortalTimByBidang('Konstruksi')" class="bg-slate-950/20 hover:bg-slate-950/30 text-slate-950 border border-slate-950/30 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1">
+                                <i class="fas fa-reply"></i> Jawab Tim
+                            </button>
+                        </div>
+                    </div>
 
-        <!-- Jasa Lainnya -->
-        <div class="bg-btn-green p-3 rounded-xl shadow-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-3 text-slate-900 font-extrabold text-sm">
-                <div class="bg-slate-900/20 p-2 rounded-lg text-xl"><i class="fas fa-gears"></i></div>
-                <span>Jasa Lainnya</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openForm('Jasa Lainnya')" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
-                </button>
-                <button onclick="filterJawabanByJenis('Jasa Lainnya')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-reply"></i> Jawab Tim
-                </button>
-            </div>
-        </div>
+                    <!-- 3. Jasa Konsultansi -->
+                    <div class="bg-emerald-400 rounded-xl p-3 text-slate-950 flex items-center justify-between shadow-md">
+                        <div class="flex items-center gap-2 font-extrabold text-sm">
+                            <i class="fas fa-comments text-base"></i> Jasa Konsultansi
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openFormModal('Jasa Konsultansi')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1 shadow">
+                                <i class="fas fa-plus-circle"></i> Buat Tiket
+                            </button>
+                            <button onclick="openPortalTimByBidang('Konsultansi')" class="bg-slate-950/20 hover:bg-slate-950/30 text-slate-950 border border-slate-950/30 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1">
+                                <i class="fas fa-reply"></i> Jawab Tim
+                            </button>
+                        </div>
+                    </div>
 
-        <!-- Pasca Kontrak -->
-        <div class="md:col-span-2 bg-btn-green p-3 rounded-xl shadow-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-3 text-slate-900 font-extrabold text-sm">
-                <div class="bg-slate-900/20 p-2 rounded-lg text-xl"><i class="fas fa-handshake"></i></div>
-                <span>Pasca Kontrak</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openForm('Pasca Kontrak')" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
-                </button>
-                <button onclick="filterJawabanByJenis('Pasca Kontrak')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
-                    <i class="fas fa-reply"></i> Jawab Tim
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+                    <!-- 4. Jasa Lainnya -->
+                    <div class="bg-emerald-400 rounded-xl p-3 text-slate-950 flex items-center justify-between shadow-md">
+                        <div class="flex items-center gap-2 font-extrabold text-sm">
+                            <i class="fas fa-gears text-base"></i> Jasa Lainnya
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openFormModal('Jasa Lainnya')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1 shadow">
+                                <i class="fas fa-plus-circle"></i> Buat Tiket
+                            </button>
+                            <button onclick="openPortalTimByBidang('Lainnya')" class="bg-slate-950/20 hover:bg-slate-950/30 text-slate-950 border border-slate-950/30 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1">
+                                <i class="fas fa-reply"></i> Jawab Tim
+                            </button>
+                        </div>
+                    </div>
 
+                    <!-- 5. Pasca Kontrak -->
+                    <div class="bg-emerald-400 rounded-xl p-3 text-slate-950 flex items-center justify-between shadow-md md:col-span-2">
+                        <div class="flex items-center gap-2 font-extrabold text-sm">
+                            <i class="fas fa-handshake text-base"></i> Pasca Kontrak
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openFormModal('Pasca Kontrak')" class="bg-slate-900 hover:bg-slate-800 text-amber-400 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1 shadow">
+                                <i class="fas fa-plus-circle"></i> Buat Tiket
+                            </button>
+                            <button onclick="openPortalTimByBidang('Pasca')" class="bg-slate-950/20 hover:bg-slate-950/30 text-slate-950 border border-slate-950/30 text-[11px] font-bold py-1.5 px-2.5 rounded-lg transition-all flex items-center gap-1">
+                                <i class="fas fa-reply"></i> Jawab Tim
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <!-- INFORMASI & DOKUMEN -->
             <div>
                 <h2 class="text-gold font-bold text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
