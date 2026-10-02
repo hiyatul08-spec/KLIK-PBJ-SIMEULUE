@@ -974,10 +974,9 @@
         alert('Gagal memperbarui data di Google Sheet.');
     });
 }
+        
         <script>
-    // ... kode script lainnya ...
-
-    // GANTI FUNGSI LAMA DENGAN KODE INI:
+    // Fungsi Pengiriman Form Buat Tiket
     function submitFormKeSheet(e) {
         if (e && e.preventDefault) e.preventDefault();
 
@@ -1036,17 +1035,17 @@
         });
     }
 
-    // ... kode script lainnya ...
-</script>       
-                
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLogo = localStorage.getItem("klikPbjLogoHeader");
-            const savedFileName = localStorage.getItem("klikPbjLogoFileName");
-            if (savedLogo && document.getElementById('headerLogoImg')) document.getElementById('headerLogoImg').src = savedLogo;
-            if (savedFileName && document.getElementById('namaFileBanner')) document.getElementById('namaFileBanner').innerText = savedFileName;
+    // Inisialisasi Aplikasi Saat Halaman Dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLogo = localStorage.getItem("klikPbjLogoHeader");
+        const savedFileName = localStorage.getItem("klikPbjLogoFileName");
+        if (savedLogo && document.getElementById('headerLogoImg')) document.getElementById('headerLogoImg').src = savedLogo;
+        if (savedFileName && document.getElementById('namaFileBanner')) document.getElementById('namaFileBanner').innerText = savedFileName;
 
+        if (typeof muatDataDariSheet === 'function') {
             muatDataDariSheet();
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
