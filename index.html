@@ -132,7 +132,7 @@
                             <button onclick="bukaModalBuat('Pengadaan Barang')" class="bg-slate-900/80 hover:bg-slate-900 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
                             </button>
-                            <button onclick="bukaModalJawab('Pengadaan Barang')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <button onclick="bukaModalPin('Barang')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-reply"></i> Jawab Tim
                                 <span id="badgeBarang" class="hidden absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">0</span>
                             </button>
@@ -148,7 +148,7 @@
                             <button onclick="bukaModalBuat('Jasa Konstruksi')" class="bg-slate-900/80 hover:bg-slate-900 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
                             </button>
-                            <button onclick="bukaModalJawab('Jasa Konstruksi')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <button onclick="bukaModalPin('Jasa Konstruksi')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-reply"></i> Jawab Tim
                                 <span id="badgeKonstruksi" class="hidden absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">0</span>
                             </button>
@@ -164,7 +164,7 @@
                             <button onclick="bukaModalBuat('Jasa Konsultansi')" class="bg-slate-900/80 hover:bg-slate-900 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
                             </button>
-                            <button onclick="bukaModalJawab('Jasa Konsultansi')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <button onclick="bukaModalPin('Jasa Konsultansi')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-reply"></i> Jawab Tim
                                 <span id="badgeKonsultansi" class="hidden absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">0</span>
                             </button>
@@ -180,7 +180,7 @@
                             <button onclick="bukaModalBuat('Jasa Lainnya')" class="bg-slate-900/80 hover:bg-slate-900 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
                             </button>
-                            <button onclick="bukaModalJawab('Jasa Lainnya')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <button onclick="bukaModalPin('Jasa Lainnya')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-reply"></i> Jawab Tim
                                 <span id="badgeLainnya" class="hidden absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">0</span>
                             </button>
@@ -196,7 +196,7 @@
                             <button onclick="bukaModalBuat('Pasca Kontrak')" class="bg-slate-900/80 hover:bg-slate-900 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-plus-circle text-amber-400"></i> Buat Tiket
                             </button>
-                            <button onclick="bukaModalJawab('Pasca Kontrak')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <button onclick="bukaModalPin('Pasca Kontrak')" class="relative bg-slate-900/40 hover:bg-slate-900/60 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
                                 <i class="fas fa-reply"></i> Jawab Tim
                                 <span id="badgePasca" class="hidden absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">0</span>
                             </button>
@@ -270,12 +270,10 @@
     <!-- MODAL DETAIL JAWABAN TIKET -->
     <div id="modalDetailTiket" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#182238] border border-slate-700/60 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative text-slate-100">
-            <!-- Tombol Close (X) -->
             <button onclick="tutupModalDetail()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl transition-colors cursor-pointer">
                 <i class="fas fa-times"></i>
             </button>
 
-            <!-- Header Tiket -->
             <div class="mb-4 border-b border-slate-800 pb-3">
                 <h3 id="modalNoTiket" class="text-xl font-bold text-amber-400 font-mono mb-1">#TKT-000</h3>
                 <p id="modalPemohon" class="text-slate-300 font-semibold text-sm">Nama Pemohon (SKPK)</p>
@@ -286,7 +284,6 @@
                 </div>
             </div>
 
-            <!-- Section Permasalahan -->
             <div class="mb-4">
                 <label class="block text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-2">PERMASALAHAN:</label>
                 <div class="bg-[#0f172a] border border-slate-700/50 rounded-xl p-4 text-sm text-slate-300 leading-relaxed" id="modalPermasalahan">
@@ -294,7 +291,6 @@
                 </div>
             </div>
 
-            <!-- Section Jawaban Tim KLIK-PBJ -->
             <div class="mb-6">
                 <label class="block text-[11px] font-bold tracking-wider text-sky-400 uppercase mb-2">TANGGAPAN / JAWABAN TIM KLIK-PBJ:</label>
                 <div class="bg-[#0f172a] border border-slate-700/50 rounded-xl p-4 text-sm text-amber-300 font-medium leading-relaxed" id="modalJawaban">
@@ -302,7 +298,6 @@
                 </div>
             </div>
 
-            <!-- Tombol Tutup -->
             <button onclick="tutupModalDetail()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl transition-colors cursor-pointer text-sm">
                 Tutup
             </button>
@@ -312,13 +307,10 @@
     <!-- MODAL FORMULIR PENGAJUAN KONSULTASI -->
     <div id="modalBuatTiket" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-[#182238] border border-slate-700/80 rounded-2xl max-w-2xl w-full p-6 space-y-4 shadow-2xl relative my-6 text-slate-100">
-            
-            <!-- Tombol Close (X) -->
             <button onclick="tutupModalBuat()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors cursor-pointer">
                 <i class="fas fa-times text-xl"></i>
             </button>
 
-            <!-- Title Header Form -->
             <div>
                 <h3 id="modalTitleForm" class="text-base md:text-lg font-bold text-amber-400 uppercase tracking-wide">
                     FORMULIR PENGAJUAN KONSULTASI: PENGADAAN BARANG
@@ -492,7 +484,6 @@
                     </div>
                 </div>
 
-                <!-- CHECKBOX PERSETUJUAN -->
                 <div class="bg-[#1e293b]/70 border border-slate-700/80 p-3 rounded-xl flex items-start gap-2.5">
                     <input type="checkbox" id="checkSetuju" required class="mt-1 w-4 h-4 rounded border-slate-700 accent-emerald-500 cursor-pointer">
                     <label for="checkSetuju" class="text-[11px] text-slate-300 leading-snug cursor-pointer">
@@ -500,7 +491,6 @@
                     </label>
                 </div>
 
-                <!-- TOMBOL AKSI FORM -->
                 <div class="flex items-center justify-between gap-3 pt-2">
                     <button type="button" onclick="tutupModalBuat()" class="w-1/3 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl text-xs transition-colors cursor-pointer">
                         Batal
@@ -513,27 +503,81 @@
         </div>
     </div>
 
-    <!-- MODAL PORTAL JAWAB TIM PBJ -->
-    <div id="modalJawabTim" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-[#1c2541] border border-amber-500/30 rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl relative">
-            <button onclick="tutupModalJawab()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+    <!-- POPUP 1: VERIFIKASI PIN TIM -->
+    <div id="modalPinTim" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-[#182238] border border-slate-700/80 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-slate-100">
+            <button onclick="tutupModalPin()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors cursor-pointer">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-                    <i class="fas fa-user-shield text-lg"></i>
+
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 text-lg">
+                    <i class="fas fa-user-shield"></i>
                 </div>
                 <div>
-                    <h3 class="text-base font-bold text-amber-400 uppercase">Portal Jawab Tim PBJ</h3>
-                    <p id="judulBidangJawab" class="text-xs text-slate-400">Bidang: Pengadaan Barang</p>
+                    <h3 class="text-base font-bold text-amber-400 uppercase tracking-wide">PORTAL JAWAB TIM PBJ</h3>
+                    <p id="subJudulPinBidang" class="text-xs text-slate-400 font-medium">Bidang: Barang</p>
                 </div>
             </div>
+
             <div class="space-y-4 text-xs">
                 <div>
-                    <label class="block font-semibold text-amber-400 mb-1">Tanggapan / Jawaban Resmi Tim KLIK-PBJ:</label>
-                    <textarea id="inputTextJawabanTim" rows="4" placeholder="Ketikkan tanggapan/solusi resmi di sini..." class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2 text-slate-200 focus:border-amber-400 focus:outline-none"></textarea>
+                    <label class="block font-semibold text-slate-200 mb-1.5">Masukkan PIN Otentikasi Tim:</label>
+                    <input type="password" id="inputPinAkses" placeholder="Ketik PIN (Contoh: 1234)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-3 text-slate-100 focus:border-amber-400 focus:outline-none text-sm">
+                    <p id="pesanPinSalah" class="text-red-400 text-[11px] mt-1.5 hidden flex items-center gap-1">
+                        <i class="fas fa-circle-exclamation"></i> PIN salah, silakan coba lagi.
+                    </p>
                 </div>
-                <button onclick="simpanJawabanTim()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition-all">
+                <button onclick="verifikasiPinDanBukaForm()" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold py-3 rounded-xl text-xs transition-all shadow-lg cursor-pointer">
+                    Verifikasi PIN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP 2: PORTAL JAWAB TIM PBJ (SETELAH PIN BENAR) -->
+    <div id="modalJawabTim" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-[#182238] border border-amber-500/30 rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl relative text-slate-100">
+            <button onclick="tutupModalJawab()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors cursor-pointer">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 text-lg">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-amber-400 uppercase tracking-wide">PORTAL JAWAB TIM PBJ</h3>
+                    <p id="judulBidangJawab" class="text-xs text-slate-400 font-medium">Bidang: Barang</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-200 mb-1">Pilih Tiket Dalam Proses:</label>
+                    <select id="selectTiketProses" onchange="updateUraianPermasalahan(this)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-amber-400 font-semibold focus:border-amber-400 focus:outline-none cursor-pointer">
+                        <option value="">-- Pilih Tiket --</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Uraian Permasalahan:</label>
+                    <div id="boxUraianPermasalahan" class="bg-[#0b132b] p-3 rounded-xl text-xs text-slate-400 italic border border-slate-800 leading-relaxed min-h-[50px]">
+                        Pilih tiket untuk melihat uraian permasalahan...
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-200 mb-1">Nama Petugas / Tim Konsultasi PBJ:</label>
+                    <input type="text" id="inputNamaPetugas" placeholder="Contoh: Tim Pokja I / Agun, SE" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-slate-100 focus:border-amber-400 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-amber-400 mb-1">Tanggapan / Jawaban Resmi Tim KLIK-PBJ:</label>
+                    <textarea id="inputTextJawabanTim" rows="4" placeholder="Ketikkan tanggapan/solusi resmi di sini..." class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-3 text-slate-100 focus:border-amber-400 focus:outline-none leading-relaxed"></textarea>
+                </div>
+
+                <button onclick="simpanJawabanTim()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-extrabold py-3 rounded-xl text-xs transition-all shadow-lg cursor-pointer">
                     Kirim & Simpan Jawaban
                 </button>
             </div>
@@ -543,38 +587,100 @@
     <!-- JAVASCRIPT LOGIK & INTEGRASI -->
     <script>
         const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbzayOIao3-SdZ0j2yWWL0Bh8a-uL9t1UrjAucpOTPcpPNZH_l82D68GI4AH7G2Xo7RC/exec";
-        let dataTiketGlobal = [];
+        const PIN_OTENTIKASI_TIM = "1234"; // PIN Default Tim
 
-        // 1. FUNGSI UNTUK MEMBUKA & MENUTUP MODAL
+        let dataTiketGlobal = [];
+        let bidangAktifTerpilih = "";
+
+        // 1. MODAL BUAT TIKET
         function bukaModalBuat(bidang) {
             const modal = document.getElementById('modalBuatTiket');
             if (modal) {
                 modal.classList.remove('hidden');
-                const inputBidang = document.getElementById('inputBidang');
-                if (inputBidang) inputBidang.value = bidang;
+                document.getElementById('inputBidang').value = bidang;
                 document.getElementById('modalTitleForm').innerText = 'FORMULIR PENGAJUAN KONSULTASI: ' + bidang.toUpperCase();
             }
         }
 
         function tutupModalBuat() {
-            const modal = document.getElementById('modalBuatTiket');
-            if (modal) modal.classList.add('hidden');
+            document.getElementById('modalBuatTiket').classList.add('hidden');
         }
 
-        function bukaModalJawab(bidang) {
-            const modal = document.getElementById('modalJawabTim');
-            if (modal) {
-                modal.classList.remove('hidden');
-                const judulBidang = document.getElementById('judulBidangJawab');
-                if (judulBidang) judulBidang.innerText = 'Bidang: ' + bidang;
+        // 2. MODAL PIN TIM (BERLAKU DINAMIS UNTUK SEMUA BIDANG)
+        function bukaModalPin(bidang) {
+            bidangAktifTerpilih = bidang;
+            document.getElementById('subJudulPinBidang').innerText = 'Bidang: ' + bidang;
+            document.getElementById('inputPinAkses').value = '';
+            document.getElementById('pesanPinSalah').classList.add('hidden');
+            document.getElementById('modalPinTim').classList.remove('hidden');
+        }
+
+        function tutupModalPin() {
+            document.getElementById('modalPinTim').classList.add('hidden');
+        }
+
+        function verifikasiPinDanBukaForm() {
+            const pinInput = document.getElementById('inputPinAkses').value;
+            const pesanError = document.getElementById('pesanPinSalah');
+
+            if (pinInput === PIN_OTENTIKASI_TIM) {
+                tutupModalPin();
+                bukaModalJawab(bidangAktifTerpilih);
+            } else {
+                pesanError.classList.remove('hidden');
             }
         }
 
-        function tutupModalJawab() {
-            const modal = document.getElementById('modalJawabTim');
-            if (modal) modal.classList.add('hidden');
+        // 3. MODAL FORM JAWAB TIM (SETELAH PIN VERIFIED)
+        function bukaModalJawab(bidang) {
+            document.getElementById('judulBidangJawab').innerText = 'Bidang: ' + bidang;
+            
+            // Populate Dropdown Tiket Sesuai Bidang
+            const selectTiket = document.getElementById('selectTiketProses');
+            selectTiket.innerHTML = '<option value="">-- Pilih Tiket Dalam Proses --</option>';
+            document.getElementById('boxUraianPermasalahan').innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+
+            const filteredData = dataTiketGlobal.filter(item => {
+                const j = (item.jenisKonsultasi || "").toLowerCase();
+                const b = bidang.toLowerCase();
+                const s = (item.status || "").toLowerCase();
+                return j.includes(b) && !s.includes("selesai");
+            });
+
+            if (filteredData.length === 0) {
+                const opt = document.createElement('option');
+                opt.value = "";
+                opt.innerText = "Tidak ada tiket belum dijawab di bidang ini";
+                selectTiket.appendChild(opt);
+            } else {
+                filteredData.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.nomorTiket;
+                    opt.innerText = `${item.nomorTiket} - ${item.namaPemohon} (${item.skpk})`;
+                    selectTiket.appendChild(opt);
+                });
+            }
+
+            document.getElementById('modalJawabTim').classList.remove('hidden');
         }
 
+        function tutupModalJawab() {
+            document.getElementById('modalJawabTim').classList.add('hidden');
+        }
+
+        function updateUraianPermasalahan(selectEl) {
+            const noTiket = selectEl.value;
+            const item = dataTiketGlobal.find(d => d.nomorTiket === noTiket);
+            const box = document.getElementById('boxUraianPermasalahan');
+
+            if (item) {
+                box.innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
+            } else {
+                box.innerText = 'Pilih tiket untuk melihat uraian permasalahan...';
+            }
+        }
+
+        // 4. MODAL DETAIL JAWABAN
         function bukaDetailJawaban(index) {
             const item = dataTiketGlobal[index];
             if (!item) return;
@@ -600,18 +706,16 @@
             }
         }
 
-        // 2. FUNGSI UTAMA MENGAMBIL DATA DARI APPS SCRIPT
+        // 5. FETCH DATA DARI APPS SCRIPT
         function muatDataDariSheet() {
             fetch(SPREADSHEET_URL)
                 .then(response => response.json())
                 .then(data => {
                     dataTiketGlobal = data;
                     
-                    // Update Notifikasi Badge & Rekapitulasi
                     updateBadgeNotifikasi(data);
                     updateRekapitulasiStatistik(data);
 
-                    // Tampilkan Tabel Utama
                     const tbody = document.getElementById('bodyTabelJawaban');
                     if (!tbody) return;
                     tbody.innerHTML = ''; 
@@ -661,42 +765,35 @@
                 .catch(err => console.error("Gagal mengambil data dari Google Sheet:", err));
         }
 
-        // 3. FUNGSI UPDATE BADGE NOTIFIKASI ANGKA MERAH
+        // 6. UPDATE BADGE & REKAP
         function updateBadgeNotifikasi(data) {
             if (!data || !Array.isArray(data)) return;
 
-            const hitungBelumJawab = {
-                Barang: 0,
-                Konstruksi: 0,
-                Konsultansi: 0,
-                Lainnya: 0,
-                Pasca: 0
-            };
+            const hitung = { Barang: 0, Konstruksi: 0, Konsultansi: 0, Lainnya: 0, Pasca: 0 };
 
             data.forEach(item => {
-                const jenis = (item.jenisKonsultasi || "").toLowerCase();
-                const status = (item.status || "").toLowerCase();
+                const j = (item.jenisKonsultasi || "").toLowerCase();
+                const s = (item.status || "").toLowerCase();
                 
-                if (!status.includes("selesai")) {
-                    if (jenis.includes("barang")) hitungBelumJawab.Barang++;
-                    else if (jenis.includes("konstruksi")) hitungBelumJawab.Konstruksi++;
-                    else if (jenis.includes("konsultansi")) hitungBelumJawab.Konsultansi++;
-                    else if (jenis.includes("lainnya")) hitungBelumJawab.Lainnya++;
-                    else if (jenis.includes("pasca")) hitungBelumJawab.Pasca++;
+                if (!s.includes("selesai")) {
+                    if (j.includes("barang")) hitung.Barang++;
+                    else if (j.includes("konstruksi")) hitung.Konstruksi++;
+                    else if (j.includes("konsultansi")) hitung.Konsultansi++;
+                    else if (j.includes("lainnya")) hitung.Lainnya++;
+                    else if (j.includes("pasca")) hitung.Pasca++;
                 }
             });
 
-            tampilkanBadge('badgeBarang', hitungBelumJawab.Barang);
-            tampilkanBadge('badgeKonstruksi', hitungBelumJawab.Konstruksi);
-            tampilkanBadge('badgeKonsultansi', hitungBelumJawab.Konsultansi);
-            tampilkanBadge('badgeLainnya', hitungBelumJawab.Lainnya);
-            tampilkanBadge('badgePasca', hitungBelumJawab.Pasca);
+            tampilkanBadge('badgeBarang', hitung.Barang);
+            tampilkanBadge('badgeKonstruksi', hitung.Konstruksi);
+            tampilkanBadge('badgeKonsultansi', hitung.Konsultansi);
+            tampilkanBadge('badgeLainnya', hitung.Lainnya);
+            tampilkanBadge('badgePasca', hitung.Pasca);
         }
 
         function tampilkanBadge(elementId, jumlah) {
             const el = document.getElementById(elementId);
             if (!el) return;
-            
             if (jumlah > 0) {
                 el.innerText = jumlah;
                 el.classList.remove('hidden');
@@ -705,7 +802,6 @@
             }
         }
 
-        // 4. FUNGSI HITUNG STATISTIK REKAPITULASI
         function updateRekapitulasiStatistik(data) {
             if (!data || !Array.isArray(data)) return;
 
@@ -725,17 +821,17 @@
                 const isSelesai = (item.status || '').toLowerCase().includes('selesai');
                 if (isSelesai) selesai++; else proses++;
 
-                const jenis = (item.jenisKonsultasi || '').toLowerCase();
-                let key = '';
-                if (jenis.includes('barang')) key = 'barang';
-                else if (jenis.includes('konstruksi')) key = 'konstruksi';
-                else if (jenis.includes('konsultansi')) key = 'konsultansi';
-                else if (jenis.includes('lainnya')) key = 'lainnya';
-                else if (jenis.includes('pasca')) key = 'pasca';
+                const j = (item.jenisKonsultasi || '').toLowerCase();
+                let k = '';
+                if (j.includes('barang')) k = 'barang';
+                else if (j.includes('konstruksi')) k = 'konstruksi';
+                else if (j.includes('konsultansi')) k = 'konsultansi';
+                else if (j.includes('lainnya')) k = 'lainnya';
+                else if (j.includes('pasca')) k = 'pasca';
 
-                if (key) {
-                    rekap[key].total++;
-                    if (isSelesai) rekap[key].selesai++; else rekap[key].proses++;
+                if (k) {
+                    rekap[k].total++;
+                    if (isSelesai) rekap[k].selesai++; else rekap[k].proses++;
                 }
             });
 
@@ -753,7 +849,6 @@
             }
         }
 
-        // 5. BANNER LOGO LOCALSTORAGE
         function previewLogoHeader(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -768,7 +863,6 @@
             }
         }
 
-        // 6. FILTER TABEL
         function filterTable() {
             const input = document.getElementById('inputSearch').value.toLowerCase();
             const rows = document.querySelectorAll('#bodyTabelJawaban tr');
@@ -794,7 +888,6 @@
             tutupModalBuat();
         }
 
-        // JALANKAN OTOMATIS SAAT DOM READY
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
             const savedFileName = localStorage.getItem("klikPbjLogoFileName");
