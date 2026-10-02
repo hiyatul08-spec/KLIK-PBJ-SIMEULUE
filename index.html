@@ -785,6 +785,23 @@
                 row.style.display = text.includes(input) ? '' : 'none';
             });
         }
+// Fungsi untuk filter tabel Jawaban Konsultasi Publik berdasarkan Jenis Pengadaan
+        function filterJawabanByJenis(jenis) {
+            // 1. Scroll otomatis ke bagian tabel jawaban publik
+            const elemenTabel = document.getElementById('jawaban-publik');
+            if (elemenTabel) {
+                elemenTabel.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // 2. Isi kolom pencarian dengan jenis pengadaan yang diklik
+            const inputSearch = document.getElementById('searchJawaban');
+            if (inputSearch) {
+                inputSearch.value = jenis;
+                // Jalankan fungsi filter
+                filterJawaban();
+            }
+        }
+        
     </script>
 </body>
 </html>
