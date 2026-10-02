@@ -240,6 +240,7 @@
 
                 </div>
             </div>
+            
             <!-- INFORMASI & DOKUMEN -->
             <div>
                 <h2 class="text-gold font-bold text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
@@ -785,20 +786,57 @@
                 row.style.display = text.includes(input) ? '' : 'none';
             });
         }
-// Fungsi untuk filter tabel Jawaban Konsultasi Publik berdasarkan Jenis Pengadaan
+// Fungsi untuk tombol Jawab Tim agar scroll ke tabel & menyaring data
         function filterJawabanByJenis(jenis) {
-            // 1. Scroll otomatis ke bagian tabel jawaban publik
-            const elemenTabel = document.getElementById('jawaban-publik');
-            if (elemenTabel) {
-                elemenTabel.scrollIntoView({ behavior: 'smooth' });
+            // 1. Scroll halus ke area tabel Jawaban Publik
+            const tabelSection = document.getElementById('jawaban-publik');
+            if (tabelSection) {
+                tabelSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            // 2. Isi kolom pencarian dengan jenis pengadaan yang diklik
+            // 2. Masukkan kata kunci ke kolom pencarian dan jalankan filter
             const inputSearch = document.getElementById('searchJawaban');
             if (inputSearch) {
                 inputSearch.value = jenis;
-                // Jalankan fungsi filter
-                filterJawaban();
+                
+                // Panggil event/fungsi pencarian
+                if (typeof filterJawaban === 'function') {
+                    filterJawaban();
+                } else {
+                    // Filter manual jika fungsi filterJawaban berbeda
+                    const rows = document.querySelectorAll('#bodyTabelJawaban tr');
+                    rows.forEach(row => {
+                        const text = row.innerText.toLowerCase();
+                        row.style.display = text.includes(jenis.toLowerCase()) ? '' : 'none';
+                    });
+                }
+            }
+        }
+
+// Fungsi untuk menangani klik tombol Jawab Tim
+        function openPortalTimByBidang(bidang) {
+            // Mapping nama bidang
+            const kataKunciMap = {
+                'Barang': 'Pengadaan Barang',
+                'Konstruksi': 'Jasa Konstruksi',
+                'Konsultansi': 'Jasa Konsultansi',
+                'Lainnya': 'Jasa Lainnya',
+                'Pasca': 'Pasca Kontrak'
+            };
+
+            const namaLengkap = kataKunciMap[bidang] || bidang;
+
+            // 1. Scroll halus ke tabel / area jawaban
+            const targetSection = document.getElementById('jawaban-publik') || document.querySelector('table');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // 2. Isi kolom pencarian & filter jika ada input pencarian
+            const inputSearch = document.getElementById('searchJawaban') || document.querySelector('input[type="search"]') || document.querySelector('input[placeholder*="Cari"]');
+            if (inputSearch) {
+                inputSearch.value = namaLengkap;
+                inputSearch.dispatchEvent(new Event('input', { bubbles: true }));
             }
         }
         
