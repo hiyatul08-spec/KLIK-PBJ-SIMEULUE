@@ -946,10 +946,46 @@
     }
 
         function submitFormKeSheet(e) {
-            e.preventDefault();
-            alert('Tiket berhasil terdaftar dan dikirim!');
-            tutupModalBuat();
-        }
+    e.preventDefault();
+
+    // Mengambil data dari form
+    const formData = {
+        action: 'buatTiket',
+        namaPemohon: document.getElementById('inputNamaPemohon')?.value || '',
+        nip: document.getElementById('inputNip')?.value || '',
+        jabatan: document.getElementById('selectJabatan')?.value || '',
+        skpk: document.getElementById('selectSkpk')?.value || '',
+        whatsapp: document.getElementById('inputWhatsapp')?.value || '',
+        email: document.getElementById('inputEmail')?.value || '',
+        tahapan: document.getElementById('selectTahapan')?.value || '',
+        metode: document.getElementById('selectMetode')?.value || '',
+        namaPaket: document.getElementById('inputNamaPaket')?.value || '',
+        pagu: document.getElementById('inputPagu')?.value || '',
+        uraian: document.getElementById('inputUraian')?.value || '',
+        solusi: document.getElementById('inputSolusi')?.value || '',
+        bentukKonsultasi: document.getElementById('selectBentukKonsultasi')?.value || '',
+        status: 'Sedang dikerjakan'
+    };
+
+    // Kirim data ke Google Apps Script
+    fetch(SPREADSHEET_URL, {
+        method: 'POST',
+        body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert('Tiket berhasil terdaftar dan dikirim!');
+        tutupModalBuat();
+        // Reset isi formulir
+        e.target.reset();
+        // Muat ulang data agar angka rekapitulasinya langsung ter-update
+        muatDataDariSheet();
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Gagal mengirim data tiket ke Google Sheet.');
+    });
+}
 
         document.addEventListener('DOMContentLoaded', () => {
             const savedLogo = localStorage.getItem("klikPbjLogoHeader");
