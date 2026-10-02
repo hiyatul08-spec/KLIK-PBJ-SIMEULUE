@@ -857,6 +857,59 @@
     // Jalankan fungsi otomatis saat halaman selesai dimuat
     document.addEventListener('DOMContentLoaded', muatDataDariSheet);
 </script>
-    
+    <script>
+    // URL Web App Google Apps Script
+    const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbzayOIao3-SdZ0j2yWWL0Bh8a-uL9t1UrjAucpOTPcpPNZH_l82D68GI4AH7G2Xo7RC/exec";
+
+    // FUNGSI KHUSUS UPDATE BADGE NOTIFIKASI
+    function updateBadgeNotifikasi(data) {
+        if (!data || !Array.isArray(data)) return;
+        
+        const hitungBelumJawab = {
+            Barang: 0,
+            Konstruksi: 0,
+            Konsultansi: 0,
+            Lainnya: 0,
+            Pasca: 0
+        };
+
+        data.forEach(item => {
+            const jenis = (item.jenisKonsultasi || "").toLowerCase();
+            const status = (item.status || "").toLowerCase();
+            
+            if (!status.includes("selesai")) {
+                if (jenis.includes("barang")) hitungBelumJawab.Barang++;
+                else if (jenis.includes("konstruksi")) hitungBelumJawab.Konstruksi++;
+                else if (jenis.includes("konsultansi")) hitungBelumJawab.Konsultansi++;
+                else if (jenis.includes("lainnya")) hitungBelumJawab.Lainnya++;
+                else if (jenis.includes("pasca")) hitungBelumJawab.Pasca++;
+            }
+        });
+
+        tampilkanBadge('badgeBarang', hitungBelumJawab.Barang);
+        tampilkanBadge('badgeKonstruksi', hitungBelumJawab.Konstruksi);
+        tampilkanBadge('badgeKonsultansi', hitungBelumJawab.Konsultansi);
+        tampilkanBadge('badgeLainnya', hitungBelumJawab.Lainnya);
+        tampilkanBadge('badgePasca', hitungBelumJawab.Pasca);
+    }
+
+    function tampilkanBadge(elementId, jumlah) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        
+        if (jumlah > 0) {
+            el.innerText = jumlah;
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    }
+
+    // Panggil penghitung badge saat data dimuat
+    fetch(SPREADSHEET_URL)
+        .then(res => res.json())
+        .then(data => updateBadgeNotifikasi(data))
+        .catch(err => console.error("Gagal muat badge:", err));
+</script>
 </body>
 </html>
