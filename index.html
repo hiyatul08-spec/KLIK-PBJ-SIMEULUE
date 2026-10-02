@@ -618,14 +618,13 @@
 // URL Web App Apps Script Google Sheet kamu
         const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbza3HK4WvPS_d4ozyWD7Vf8OcOUjNpnoCloazEjVwd6htd6MBCFO3Pbpr3XcxC6-oCy/exec";
 
-        // Simpan data global agar mudah dipanggil saat klik tombol Lihat Jawaban
         let dataTiketGlobal = [];
 
         function muatDataDariSheet() {
             fetch(SPREADSHEET_URL)
                 .then(response => response.json())
                 .then(data => {
-                    dataTiketGlobal = data; // Simpan ke array global
+                    dataTiketGlobal = data;
                     const tbody = document.getElementById('bodyTabelJawaban') || document.querySelector('tbody');
                     if (!tbody) return;
 
@@ -640,7 +639,6 @@
                         const tr = document.createElement('tr');
                         tr.className = 'border-b border-slate-700/50 hover:bg-slate-800/40 transition-colors';
 
-                        // Warna badge status otomatis
                         let statusBg = 'bg-amber-500/20 text-amber-400 border-amber-500/30';
                         if ((item.status || '').toLowerCase().includes('selesai')) {
                             statusBg = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
@@ -677,15 +675,27 @@
                 .catch(err => console.error("Gagal mengambil data dari Google Sheet:", err));
         }
 
-        // Fungsi menampilkan pop-up detail jawaban saat tombol diklik
+        // Fungsi Membuka Pop-up Modal Gambar 2
         function bukaDetailJawaban(index) {
             const item = dataTiketGlobal[index];
             if (!item) return;
 
-            alert(`=========================================\nDETAIL JAWABAN KONSULTASI\n=========================================\n\nNo. Tiket: ${item.nomorTiket}\nTanggal: ${item.tanggal}\nPemohon: ${item.namaPemohon} (${item.skpk})\nJenis: ${item.jenisKonsultasi}\n\n[URAIAN PERMASALAHAN]\n${item.permasalahan}\n\n[JAWABAN TIM KLIK-PBJ]\n${item.jawaban}\n\nStatus: ${item.status}`);
+            document.getElementById('modalNoTiket').innerText = item.nomorTiket || '-';
+            document.getElementById('modalPemohon').innerText = `${item.namaPemohon} (${item.skpk})`;
+            document.getElementById('modalJenis').innerText = item.jenisKonsultasi || 'Konsultasi';
+            document.getElementById('modalPermasalahan').innerText = item.permasalahan || 'Tidak ada uraian permasalahan.';
+            document.getElementById('modalJawaban').innerText = item.jawaban || 'Sedang Ditelaah Tim.';
+
+            document.getElementById('modalDetailTiket').classList.remove('hidden');
         }
 
-        document.addEventListener('DOMContentLoaded', muatDataDariSheet);        
+        // Fungsi Menutup Pop-up Modal
+        function tutupModalDetail() {
+            document.getElementById('modalDetailTiket').classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', muatDataDariSheet);   
+    
     </script>
 
     <!-- MODAL DETAIL JAWABAN (PERSIS GAMBAR 2) -->
